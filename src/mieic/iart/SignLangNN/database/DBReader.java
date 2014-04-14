@@ -17,7 +17,7 @@ public class DBReader {
     private String databaseDir = "database/tctodd";
     private Integer foldersNum = 9;
 
-    public DBReader getInstance() {
+    public static DBReader getInstance() {
         if (reader == null) {
             reader = new DBReader();
         }
@@ -43,7 +43,8 @@ public class DBReader {
     }
 
     private void readSample(File gesture) {
-        Sample sample = new Sample(gesture.getName());
+        String gestureName = gesture.getName().split("-")[0].trim();
+        Sample sample = new Sample(gestureName);
 
         Scanner in = null;
         try {
