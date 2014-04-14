@@ -113,7 +113,7 @@ public class Network {
 
     }
 
-    private float[] feedForward(float[] sample) {
+    public float[] feedForward(float[] sample) {
 
         Log.log("Feeding-forward sample" + Arrays.toString(sample) + ".");
 
