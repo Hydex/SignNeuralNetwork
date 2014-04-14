@@ -1,5 +1,7 @@
 package mieic.iart.SignLangNN.neuralnetwork;
 
+import mieic.iart.SignLangNN.frontend.Log;
+
 import java.util.Random;
 
 /**
@@ -45,14 +47,18 @@ public class Edge {
 
     public void setWeight(float weight) {
         this.weight = weight;
+        Log.log("Weight set to " + weight);
     }
 
     public void inflowValue(float val) {
         savedValue = val;
+        Log.log("Value received from previous node: " + val);
     }
 
     public float outflowValue() {
-        return savedValue * weight;
+        float outflowValue = savedValue * weight;
+        Log.log("Sent value to next node: " + outflowValue);
+        return outflowValue;
     }
 
     // training functions
@@ -62,11 +68,16 @@ public class Edge {
     }
 
     public float backPropagateError() {
-        return error * weight;
+        float weightedError = error * weight;
+        Log.log("Feeding-backward the error. Value: " + weightedError);
+        return weightedError;
     }
 
     public void updateWeight() {
+        float oldWeight = weight;
         weight = weight + Network.LEARNING_RATE * destinationNode.getError() * (float) (Math.exp(sourceNode.getOutput())
                 / Math.pow(Math.exp(sourceNode.getOutput()) + 1, 2.0));
+
+        Log.log("Weight changed from " + oldWeight + " to " + weight);
     }
 }

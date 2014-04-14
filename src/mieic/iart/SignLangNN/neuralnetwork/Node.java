@@ -1,6 +1,7 @@
 package mieic.iart.SignLangNN.neuralnetwork;
 
 import com.sun.javafx.scene.control.skin.VirtualFlow;
+import mieic.iart.SignLangNN.frontend.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +53,7 @@ public class Node {
 
     public void setValue(float value) {
         this.value = value;
+        Log.log("Node's value set to: " + value);
     }
 
     public void receiveValue() {
@@ -61,7 +63,14 @@ public class Node {
             weightedSum += e.outflowValue();
         }
 
+        Log.log("Nodes value resulting from weighted edges values: " + weightedSum);
+
         value = weightedSum;
+    }
+
+    public float getOutput() {
+        float feedVal = (float) (1.0 / (1.0 + Math.exp(- value)));
+        return feedVal;
     }
 
     public void sendValue() {
@@ -70,15 +79,11 @@ public class Node {
         }
     }
 
-    public float getOutput() {
-        float feedVal = (float) (1.0 / (1.0 + Math.exp(- value)));
-        return feedVal;
-    }
-
 
     // training functions
     public void setError(float error) {
         this.error = error;
+        Log.log("Error set to: " + error);
     }
 
     public void calcError() {
@@ -88,6 +93,7 @@ public class Node {
             weightedSum += e.backPropagateError();
         }
 
+        Log.log("Error resulting from weighted edges errors set to: " + weightedSum);
         error = weightedSum;
     }
 

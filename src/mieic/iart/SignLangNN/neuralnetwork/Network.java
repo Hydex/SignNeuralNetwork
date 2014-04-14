@@ -1,6 +1,9 @@
 package mieic.iart.SignLangNN.neuralnetwork;
 
+import mieic.iart.SignLangNN.frontend.Log;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -19,15 +22,22 @@ public class Network {
         nodes = new ArrayList<>();
         edges = new ArrayList<>();
         isInitialized = false;
+
+        Log.log("Empty neural network created");
     }
 
     public void clearNetwork() {
         nodes.clear();
+        edges.clear();
         isInitialized = false;
+
+        Log.log("Network cleared");
     }
 
     public void addInputLayer(int nr) {
         nodes.add(0, new ArrayList<Node>(nr));
+
+        Log.log("Created " + nr + " input neurons.");
     }
 
 
@@ -36,13 +46,22 @@ public class Network {
      */
     public void addLayer(int nr, int[][] parents) throws InvalidLayerException {
         if (isInitialized) {
+            System.err.println("Netork already closed. Please clear it before adding layers");
             return;
         }
-        if (nr != parents.length || nodes.size() < 1) {
+        if (nr != parents.length ) {
+            System.err.println("Invalid arguments. Please match size of parents with nr.");
+            throw new InvalidLayerException();
+        }
+
+        if (nodes.size() < 1) {
+            System.err.println("Please first add a input layer.");
             throw new InvalidLayerException();
         }
 
         nodes.add(new ArrayList<Node>(nr));
+
+        Log.log("Middle layer with " + nr + " neurons added.");
 
         int i = 0;
         for (Node node : nodes.get(nodes.size() - 1)) {
@@ -53,28 +72,51 @@ public class Network {
                 parent.addDestinationEdge(edge);
                 node.addSourceEdge(edge);
                 edges.add(edge);
+
+                Log.log("Added edge from [" + (nodes.size() - 2) + "][" + parents[i][j] + "] to ["
+                    + (nodes.size() - 1) + "][" + i + "]");
             }
             i++;
         }
 
     }
 
-    public void finnalize() {
+    public void finalize() {
         isInitialized = true;
+
+        Log.log("Network finalized");
     }
 
-    public void train(float[] sample, float[] expectedResults) throws InvalidSampleException {
-        if (sample.length != nodes.get(0).size()
-                || expectedResults.length != nodes.get(nodes.size() - 1).size()) {
+    public void train(float[] sample, float[] expectedResults) throws InvalidSampleException, InitializedNetworkException {
+        if (!isInitialized) {
+            Log.log("Network not properly initialized.");
+            throw new InitializedNetworkException();
+        }
+
+        if (sample.length != nodes.get(0).size()) {
+            Log.log("");
+            throw new InvalidSampleException();
+        }
+
+        if (expectedResults.length != nodes.get(nodes.size() - 1).size()) {
+            Log.log("Expected results array size do not correspond to the size of the output neurons layer.");
             throw new InvalidSampleException();
         }
 
         float[] currentResults = feedForward(sample);
         feedBackward(expectedResults, currentResults);
 
+        // update network
+        for (Edge e: edges) {
+            e.updateWeight();
+        }
+
     }
 
     private float[] feedForward(float[] sample) {
+
+        Log.log("Feeding-forward sample" + Arrays.toString(sample) + ".");
+
         // input neurons
         int i = 0;
         for (Node n : nodes.get(0)) {
@@ -85,8 +127,8 @@ public class Network {
         }
 
         // middle-layer neurons
-        for (int j = 1; i < nodes.size() - 1; i++) {
-            List<Node> currentNodes = nodes.get(i);
+        for (int j = 1; j < nodes.size() - 1; j++) {
+            List<Node> currentNodes = nodes.get(j);
             for (Node n : currentNodes) {
                 n.receiveValue();
                 n.sendValue();
@@ -102,10 +144,15 @@ public class Network {
             k++;
         }
 
+        Log.log("Result values " + Arrays.toString(retVals) + ".");
+
         return retVals;
     }
 
     private void feedBackward(float[] expectedResults, float[] currentResults) {
+
+        Log.log("Feeding-backward with expected values: " + Arrays.toString(expectedResults));
+
         int size = expectedResults.length;
         float[] outputErrors = new float[size];
 
@@ -134,16 +181,14 @@ public class Network {
         for(Node n: nodes.get(0)) {
             n.calcError();
         }
-
-        // update network
-        for (Edge e: edges) {
-            e.updateWeight();
-        }
     }
 
     public static class InvalidLayerException extends Exception {
     }
 
     public static class InvalidSampleException extends Exception {
+    }
+
+    public static class InitializedNetworkException extends Exception {
     }
 }
