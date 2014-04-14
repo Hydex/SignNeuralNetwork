@@ -59,6 +59,10 @@ public class HandGesture {
      */
     private float littlefingerBend = 0;
 
+    public HandGesture() {
+
+    }
+
     public HandGesture(float x, float y, float z, float roll, float pitch, float yaw, float thumbBend, float forefingerBend, float middlefingerBend,
                        float ringfingerBend, float littlefingerBend) {
         this.x = x;
@@ -116,5 +120,49 @@ public class HandGesture {
 
     public float getLittlefingerBend() {
         return littlefingerBend;
+    }
+
+    public void setX(float x) {
+        this.x = x;
+    }
+
+    public void setY(float y) {
+        this.y = y;
+    }
+
+    public void setZ(float z) {
+        this.z = z;
+    }
+
+    public void setRoll(float roll) {
+        this.roll = roll;
+    }
+
+    public void setPitch(float pitch) {
+        this.pitch = pitch;
+    }
+
+    public void setYaw(float yaw) {
+        this.yaw = yaw;
+    }
+
+    public void setThumbBend(float thumbBend) {
+        this.thumbBend = thumbBend;
+    }
+
+    public void setForefingerBend(float forefingerBend) {
+        this.forefingerBend = forefingerBend;
+    }
+
+    public void setMiddlefingerBend(float middlefingerBend) {
+        this.middlefingerBend = middlefingerBend;
+    }
+
+    public void setRingfingerBend(float ringfingerBend) {
+        this.ringfingerBend = ringfingerBend;
+    }
+
+    public void setLittlefingerBend(float littlefingerBend) {
+        this.littlefingerBend = littlefingerBend;
     }
 }
