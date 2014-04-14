@@ -8,19 +8,20 @@ import java.util.ArrayList;
 public class Sample {
 
     private String name;
+    private Float hash;
     private ArrayList<HandGesture> rightHandGestures;
     private ArrayList<HandGesture> leftHandGestures;
-    private Float[] mediumGesture;
+    private float[] averageGesture;
 
     public Sample(String newName) {
         name = newName;
         rightHandGestures = new ArrayList<>();
         leftHandGestures = new ArrayList<>();
-        mediumGesture = new Float[22];
+        averageGesture = new float[22];
     }
 
-    public Integer processName() {
-        int hash = 7;
+    public Float processName() {
+        hash = (float) 7.0;
         for (int i = 0; i < name.length(); i++) {
             hash = hash * 31 + name.charAt(i);
         }
@@ -58,8 +59,8 @@ public class Sample {
             values[21] += rightHandGestures.get(i).getLittlefingerBend();
         }
 
-        for (int j=0; j < mediumGesture.length;j++) {
-            mediumGesture[j] = values[j] / (float)i;
+        for (int j=0; j < averageGesture.length;j++) {
+            averageGesture[j] = values[j] / (float)i;
         }
     }
 
@@ -93,5 +94,21 @@ public class Sample {
 
     public void setLeftHandGestures(ArrayList<HandGesture> leftHandGestures) {
         this.leftHandGestures = leftHandGestures;
+    }
+
+    public float[] getAverageGesture() {
+        return averageGesture;
+    }
+
+    public void setAverageGesture(float[] newMediumGesture) {
+        averageGesture = newMediumGesture;
+    }
+
+    public Float getHash() {
+        return hash;
+    }
+
+    public void setHash(Float newHash) {
+        hash = newHash;
     }
 }

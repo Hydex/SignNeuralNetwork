@@ -57,6 +57,7 @@ public class DBReader {
             readHandGesture(sample, in);
         }
 
+        sample.processGesture();
         Intel.getInstance().addSamples(sample);
     }
 

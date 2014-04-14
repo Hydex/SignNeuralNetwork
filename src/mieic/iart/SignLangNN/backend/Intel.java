@@ -12,10 +12,11 @@ public class Intel {
 
     private static Intel sInstance = null;
     private ArrayList<Sample> samples;
-    private HashMap<String, Integer> results;
+    private HashMap<String, Float> results;
 
     private Intel() {
         samples = new ArrayList<>();
+        results = new HashMap<>();
     }
 
     public static Intel getInstance() {
