@@ -12,7 +12,7 @@ public class Intel {
 
     private static Intel sInstance = null;
     private ArrayList<Sample> samples;
-    private HashMap<Integer, String> results;
+    private HashMap<String, Integer> results;
 
     private Intel() {
         samples = new ArrayList<>();
@@ -29,7 +29,7 @@ public class Intel {
         DBReader.getInstance().read();
 
         for (int i=0; i < samples.size(); i++) {
-            results.put(samples.get(i).processName(), samples.get(i).getName());
+            results.put(samples.get(i).getName(), samples.get(i).processName());
         }
     }
 
