@@ -14,5 +14,4 @@ public class Log {
             System.out.println(new Timestamp(date.getTime()) + "=>" + messg);
         }
     }
-
 }
