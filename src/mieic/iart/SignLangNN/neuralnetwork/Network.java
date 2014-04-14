@@ -45,6 +45,9 @@ public class Network {
         Adds a new layer to the network. The last one added before call to finishNetwork will be the output layer
      */
     public void addLayer(int nr, int[][] parents) throws InvalidLayerException {
+
+        int[][] parents_1 = {{0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21}};
+
         if (isInitialized) {
             System.err.println("Netork already closed. Please clear it before adding layers");
             return;
@@ -158,6 +161,7 @@ public class Network {
 
         for (int i = 0; i < size; i++) {
             outputErrors[i] = expectedResults[i] - currentResults[i];
+            Log.log("Error " + i + ": " + outputErrors[i]);
         }
 
         // output layer
