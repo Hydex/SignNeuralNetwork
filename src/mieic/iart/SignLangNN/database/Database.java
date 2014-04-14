@@ -9,10 +9,10 @@ public class Database {
 
     public Database getInstance() {
         if (dInstance == null) {
-            return new Database();
+            dInstance = new Database();
         }
-        else {
-            return dInstance;
-        }
+
+        return dInstance;
+
     }
 }

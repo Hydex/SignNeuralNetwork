@@ -13,8 +13,17 @@ import java.util.Scanner;
  */
 public class DBReader {
 
+    private static DBReader reader = null;
     private String databaseDir = "database/tctodd";
     private Integer foldersNum = 9;
+
+    public DBReader getInstance() {
+        if (reader == null) {
+            reader = new DBReader();
+        }
+
+        return reader;
+    }
 
     public void read() {
         String gesturePath;
