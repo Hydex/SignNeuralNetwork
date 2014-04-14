@@ -5,4 +5,14 @@ package mieic.iart.SignLangNN.database;
  */
 public class Database {
 
+    private static Database dInstance = null;
+
+    public Database getInstance() {
+        if (dInstance == null) {
+            return new Database();
+        }
+        else {
+            return dInstance;
+        }
+    }
 }
