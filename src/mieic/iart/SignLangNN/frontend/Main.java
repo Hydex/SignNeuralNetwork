@@ -1,6 +1,7 @@
 package mieic.iart.SignLangNN.frontend;
 
 import mieic.iart.SignLangNN.backend.Intel;
+import mieic.iart.SignLangNN.backend.NNTrainer;
 import mieic.iart.SignLangNN.neuralnetwork.Network;
 
 /**
@@ -25,14 +26,8 @@ public class Main {
 
         neuralNetwork.finalize();
 
-        float[] expected = {Intel.getInstance().getSamples().get(0).getHash()};
-        try {
-            neuralNetwork.train(Intel.getInstance().getSamples().get(0).getAverageGesture(), expected);
-        } catch (Network.InvalidSampleException e) {
-            e.printStackTrace();
-        } catch (Network.InitializedNetworkException e) {
-            e.printStackTrace();
-        }
+        NNTrainer trainer = new NNTrainer(neuralNetwork);
+        trainer.trainNN(Intel.getInstance().getSamples());
 
         new Cli().menu(neuralNetwork);
     }
