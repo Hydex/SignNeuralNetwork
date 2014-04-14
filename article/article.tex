@@ -16,10 +16,30 @@
 
 \section{Learning Algorithm}
 
-\subsection{Feed-forward}
+\subsection{Feedforward}
+Uma rede neuronal feedforward é uma rede em que os neurónios (unidade básica de uma rede neuronal) apenas estão ligados a neurónios das camadas seguintes.
 
-\subsection{Feed-backward}
+Deste modo, aproveitamos o facto da nossa rede neuronal ser uma rede "feedforward" e criámos um método com o mesmo nome, cujo objetivo é propagar a  \textbf{informação} pela rede neuronal.
+Assim, dividimos o problema em duas partes.
+A primeira parte consiste em propagar os valores por toda a rede, parte essa que está implementada no método "feedforward".
+
+A segunda parte consiste na aplicação do algoritmo de propagação, a ser explicada mais à frente.
+
+ \textbf{Devemos explicar os diferentes tipos de redes que há expôr as fórmulas que usamos}
+
+\subsection{Feedbackward}
+Ao contrário do feedforward, o feedbackward não é um tipo de rede neuronal mas um nome que atribuimos a um método que faz a retropropagação, sendo que o sentido em que a rede propaga \textbf{informação} é do fim para o princípio.
+
+Isto é, após o cálculo dos erros na camada de saída, os erros devem ser propagados para as camadas intermédias e à medida que o erro vai sendo propagado, os pesos das ligações entre camadas é alterado de modo a diminuir o erro.
+
+Assim , a função a que chamamos feedbackward aplica o algoritmo de retropropagação à rede neuronal.
+
+ \textbf{Falta apresentar as fórmulas visto que já temos uma breve descrição de como funciona}
 
 \subsection{Update Edges Weights}
+Atualizar o peso das ligações (é equivalente a minimizar os erros na camada de saída) é o modo de se reduzir para zero, ou aproximadamente zero, o erro na camada de saída, tornando a rede neuronal fidedigna.
 
+Este processo é feito através da função de custo quadrático e da sua derivada, sendo que a primeira é a função a minimizar no algoritmo de retropropagação (apresentando \textbf{\textit{x}} exemplos a um rede com \textbf{\textit{y}} saídas).
+
+ \textbf{Falta explicar como funciona e apresentar as fórmulas}
 \end{document}
