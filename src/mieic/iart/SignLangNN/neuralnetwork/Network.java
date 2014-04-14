@@ -97,7 +97,7 @@ public class Network {
         }
 
         if (sample.length != nodes.get(0).size()) {
-            Log.log("");
+            Log.log("Sample size does not correspond to the size of the input neuron layer.");
             throw new InvalidSampleException();
         }
 
