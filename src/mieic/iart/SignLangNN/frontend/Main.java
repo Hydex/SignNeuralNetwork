@@ -34,7 +34,7 @@ public class Main {
             e.printStackTrace();
         }
 
-        Cli cli = new Cli();
+        new Cli().menu(neuralNetwork);
     }
 
 }

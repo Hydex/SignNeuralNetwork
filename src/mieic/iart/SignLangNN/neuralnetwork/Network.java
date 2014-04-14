@@ -35,7 +35,13 @@ public class Network {
     }
 
     public void addInputLayer(int nr) {
-        nodes.add(0, new ArrayList<Node>(nr));
+        ArrayList<Node> newLayer = new ArrayList<>();
+
+        for (int i = 0; i < nr; i++) {
+            newLayer.add(new Node());
+        }
+
+        nodes.add(0, newLayer);
 
         Log.log("Created " + nr + " input neurons.");
     }
@@ -45,8 +51,6 @@ public class Network {
         Adds a new layer to the network. The last one added before call to finishNetwork will be the output layer
      */
     public void addLayer(int nr, int[][] parents) throws InvalidLayerException {
-
-        int[][] parents_1 = {{0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21}};
 
         if (isInitialized) {
             System.err.println("Netork already closed. Please clear it before adding layers");
@@ -62,7 +66,13 @@ public class Network {
             throw new InvalidLayerException();
         }
 
-        nodes.add(new ArrayList<Node>(nr));
+        ArrayList<Node> newLayer = new ArrayList<>();
+
+        for (int i = 0; i < nr; i++) {
+            newLayer.add(new Node());
+        }
+
+        nodes.add(newLayer);
 
         Log.log("Middle layer with " + nr + " neurons added.");
 
@@ -91,6 +101,10 @@ public class Network {
     }
 
     public void train(float[] sample, float[] expectedResults) throws InvalidSampleException, InitializedNetworkException {
+
+        // TODO: remove
+        Log.log("Network size: " + nodes.size());
+
         if (!isInitialized) {
             Log.log("Network not properly initialized.");
             throw new InitializedNetworkException();
@@ -102,7 +116,7 @@ public class Network {
         }
 
         if (expectedResults.length != nodes.get(nodes.size() - 1).size()) {
-            Log.log("Expected results array size do not correspond to the size of the output neurons layer.");
+            Log.log("Expected results array size do not correspond to the size of the output neurons layer.\n");
             throw new InvalidSampleException();
         }
 

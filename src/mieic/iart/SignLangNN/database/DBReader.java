@@ -57,11 +57,10 @@ public class DBReader {
             readHandGesture(sample, in);
         }
 
-        sample.processGesture();
         Intel.getInstance().addSamples(sample);
     }
 
-    private void readHandGesture(Sample sample, Scanner in) {
+    public void readHandGesture(Sample sample, Scanner in) {
         HandGesture hand = new HandGesture();
         hand.setX(in.nextFloat());
         hand.setY(in.nextFloat());
@@ -91,6 +90,7 @@ public class DBReader {
         hand.setLittlefingerBend(in.nextFloat());
 
         sample.addRightGesture(hand);
+        sample.processGesture();
     }
 
     public String getDatabaseDir() {
