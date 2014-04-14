@@ -28,7 +28,7 @@ public class DBReader {
     public void read() {
         String gesturePath;
 
-        for (int i = 0; i < foldersNum; i++) {
+        for (int i = 1; i <= foldersNum; i++) {
             gesturePath = databaseDir + i;
 
             File gestureFolder = new File(gesturePath);
@@ -90,5 +90,21 @@ public class DBReader {
         hand.setLittlefingerBend(in.nextFloat());
 
         sample.addRightGesture(hand);
+    }
+
+    public String getDatabaseDir() {
+        return databaseDir;
+    }
+
+    public void setDatabaseDir(String databaseDir) {
+        this.databaseDir = databaseDir;
+    }
+
+    public Integer getFoldersNum() {
+        return foldersNum;
+    }
+
+    public void setFoldersNum(Integer foldersNum) {
+        this.foldersNum = foldersNum;
     }
 }
