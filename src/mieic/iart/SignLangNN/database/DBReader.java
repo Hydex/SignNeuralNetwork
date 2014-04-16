@@ -53,7 +53,7 @@ public class DBReader {
             e.printStackTrace();
         }
 
-        while (in.hasNextFloat()) {
+        while (in.hasNextDouble()) {
             readHandGesture(sample, in);
         }
 
@@ -62,32 +62,32 @@ public class DBReader {
 
     public void readHandGesture(Sample sample, Scanner in) {
         HandGesture hand = new HandGesture();
-        hand.setX(in.nextFloat());
-        hand.setY(in.nextFloat());
-        hand.setZ(in.nextFloat());
-        hand.setRoll(in.nextFloat());
-        hand.setPitch(in.nextFloat());
-        hand.setYaw(in.nextFloat());
-        hand.setThumbBend(in.nextFloat());
-        hand.setForefingerBend(in.nextFloat());
-        hand.setMiddlefingerBend(in.nextFloat());
-        hand.setRingfingerBend(in.nextFloat());
-        hand.setLittlefingerBend(in.nextFloat());
+        hand.setX(in.nextDouble());
+        hand.setY(in.nextDouble());
+        hand.setZ(in.nextDouble());
+        hand.setRoll(in.nextDouble());
+        hand.setPitch(in.nextDouble());
+        hand.setYaw(in.nextDouble());
+        hand.setThumbBend(in.nextDouble());
+        hand.setForefingerBend(in.nextDouble());
+        hand.setMiddlefingerBend(in.nextDouble());
+        hand.setRingfingerBend(in.nextDouble());
+        hand.setLittlefingerBend(in.nextDouble());
 
         sample.addLeftGesture(hand);
 
         hand = new HandGesture();
-        hand.setX(in.nextFloat());
-        hand.setY(in.nextFloat());
-        hand.setZ(in.nextFloat());
-        hand.setRoll(in.nextFloat());
-        hand.setPitch(in.nextFloat());
-        hand.setYaw(in.nextFloat());
-        hand.setThumbBend(in.nextFloat());
-        hand.setForefingerBend(in.nextFloat());
-        hand.setMiddlefingerBend(in.nextFloat());
-        hand.setRingfingerBend(in.nextFloat());
-        hand.setLittlefingerBend(in.nextFloat());
+        hand.setX(in.nextDouble());
+        hand.setY(in.nextDouble());
+        hand.setZ(in.nextDouble());
+        hand.setRoll(in.nextDouble());
+        hand.setPitch(in.nextDouble());
+        hand.setYaw(in.nextDouble());
+        hand.setThumbBend(in.nextDouble());
+        hand.setForefingerBend(in.nextDouble());
+        hand.setMiddlefingerBend(in.nextDouble());
+        hand.setRingfingerBend(in.nextDouble());
+        hand.setLittlefingerBend(in.nextDouble());
 
         sample.addRightGesture(hand);
         sample.processGesture();

@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class NeuralNetwork {
 
-    static final float LEARNING_RATE = (float) 0.01; // 0 <= value <= 1
+    static final double LEARNING_RATE = 0.01; // 0 <= value <= 1
 
     private List<List<Node>> nodes;
     private List<Edge> edges;
@@ -100,7 +100,7 @@ public class NeuralNetwork {
         Log.log("NeuralNetwork finalized");
     }
 
-    public void train(float[] sample, float[] expectedResults) throws InvalidSampleException, InitializedNetworkException {
+    public void train(double[] sample, double[] expectedResults) throws InvalidSampleException, InitializedNetworkException {
 
         // TODO: remove
         Log.log("NeuralNetwork size: " + nodes.size());
@@ -120,7 +120,7 @@ public class NeuralNetwork {
             throw new InvalidSampleException();
         }
 
-        float[] currentResults = feedForward(sample);
+        double[] currentResults = feedForward(sample);
         feedBackward(expectedResults, currentResults);
 
         // update network
@@ -130,7 +130,7 @@ public class NeuralNetwork {
 
     }
 
-    public float[] feedForward(float[] sample) {
+    public double[] feedForward(double[] sample) {
 
         Log.log("Feeding-forward sample" + Arrays.toString(sample) + ".");
 
@@ -153,7 +153,7 @@ public class NeuralNetwork {
         }
 
         // output neurons
-        float[] retVals = new float[nodes.get(nodes.size() - 1).size()];
+        double[] retVals = new double[nodes.get(nodes.size() - 1).size()];
         int k = 0;
         for (Node n: nodes.get(nodes.size() - 1)) {
             n.receiveValue();
@@ -166,12 +166,12 @@ public class NeuralNetwork {
         return retVals;
     }
 
-    private void feedBackward(float[] expectedResults, float[] currentResults) {
+    private void feedBackward(double[] expectedResults, double[] currentResults) {
 
         Log.log("Feeding-backward with expected values: " + Arrays.toString(expectedResults));
 
         int size = expectedResults.length;
-        float[] outputErrors = new float[size];
+        double[] outputErrors = new double[size];
 
         for (int i = 0; i < size; i++) {
             outputErrors[i] = expectedResults[i] - currentResults[i];

@@ -7,64 +7,64 @@ public class HandGesture {
     /*
      * x position expressed relative to a zero point set slightly below the chin. Expressed in meters.
      */
-    private float x = 0;
+    private double x = 0;
 
     /*
      * y position expressed relative to a zero point set slightly below the chin. Expressed in meters.
      */
-    private float y = 0;
+    private double y = 0;
 
     /*
      * z position expressed relative to a zero point set slightly below the chin. Expressed in meters.
      */
-    private float z = 0;
+    private double z = 0;
 
     /*
      * roll expressed as a value between -0.5 and 0.5 with 0 being palm down. Positive means the palm is rolled clockwise from the perspective of the signer. To get degrees, multiply by 180.
      */
-    private float roll = 0;
+    private double roll = 0;
 
     /*
      * pitch expressed as a value between -0.5 and 0.5 with 0 being palm flat (horizontal). Positive means the palm is pointing up. To get degrees, multiply by 180.
      */
-    private float pitch = 0;
+    private double pitch = 0;
 
     /*
      * yaw expressed a value between -1.0 and 1.0 with 0 being palm straight ahead from the perspective of the signer. Positive means clockwise from the perspective above the signer. To get degrees, multiply by 180.
      */
-    private float yaw = 0;
+    private double yaw = 0;
 
     /*
      * Thumb bend measure between 0 and 1. 0 means totally flat, 1 means totally bent. However, the finger bend measurements are not very exact.
      */
-    private float thumbBend = 0;
+    private double thumbBend = 0;
 
     /*
      * Forefinger bend measure between 0 and 1. 0 means totally flat, 1 means totally bent. However, the finger bend measurements are not very exact.
      */
-    private float forefingerBend = 0;
+    private double forefingerBend = 0;
 
     /*
      * Middle finger bend measure between 0 and 1. 0 means totally flat, 1 means totally bent. However, the finger bend measurements are not very exact.
      */
-    private float middlefingerBend = 0;
+    private double middlefingerBend = 0;
 
     /*
      * Ring finger bend measure between 0 and 1. 0 means totally flat, 1 means totally bent. However, the finger bend measurements are not very exact.
      */
-    private float ringfingerBend = 0;
+    private double ringfingerBend = 0;
 
     /*
      * Little finger bend measure between 0 and 1. 0 means totally flat, 1 means totally bent. However, the finger bend measurements are not very exact.
      */
-    private float littlefingerBend = 0;
+    private double littlefingerBend = 0;
 
     public HandGesture() {
 
     }
 
-    public HandGesture(float x, float y, float z, float roll, float pitch, float yaw, float thumbBend, float forefingerBend, float middlefingerBend,
-                       float ringfingerBend, float littlefingerBend) {
+    public HandGesture(double x, double y, double z, double roll, double pitch, double yaw, double thumbBend, double forefingerBend, double middlefingerBend,
+                       double ringfingerBend, double littlefingerBend) {
         this.x = x;
         this.y = y;
         this.z = z;
@@ -78,91 +78,91 @@ public class HandGesture {
         this.littlefingerBend = littlefingerBend;
     }
 
-    public float getX() {
+    public double getX() {
         return x;
     }
 
-    public float getY() {
+    public double getY() {
         return y;
     }
 
-    public float getZ() {
+    public double getZ() {
         return z;
     }
 
-    public float getRoll() {
+    public double getRoll() {
         return roll;
     }
 
-    public float getPitch() {
+    public double getPitch() {
         return pitch;
     }
 
-    public float getYaw() {
+    public double getYaw() {
         return yaw;
     }
 
-    public float getThumbBend() {
+    public double getThumbBend() {
         return thumbBend;
     }
 
-    public float getForefingerBend() {
+    public double getForefingerBend() {
         return forefingerBend;
     }
 
-    public float getMiddlefingerBend() {
+    public double getMiddlefingerBend() {
         return middlefingerBend;
     }
 
-    public float getRingfingerBend() {
+    public double getRingfingerBend() {
         return ringfingerBend;
     }
 
-    public float getLittlefingerBend() {
+    public double getLittlefingerBend() {
         return littlefingerBend;
     }
 
-    public void setX(float x) {
+    public void setX(double x) {
         this.x = x;
     }
 
-    public void setY(float y) {
+    public void setY(double y) {
         this.y = y;
     }
 
-    public void setZ(float z) {
+    public void setZ(double z) {
         this.z = z;
     }
 
-    public void setRoll(float roll) {
+    public void setRoll(double roll) {
         this.roll = roll;
     }
 
-    public void setPitch(float pitch) {
+    public void setPitch(double pitch) {
         this.pitch = pitch;
     }
 
-    public void setYaw(float yaw) {
+    public void setYaw(double yaw) {
         this.yaw = yaw;
     }
 
-    public void setThumbBend(float thumbBend) {
+    public void setThumbBend(double thumbBend) {
         this.thumbBend = thumbBend;
     }
 
-    public void setForefingerBend(float forefingerBend) {
+    public void setForefingerBend(double forefingerBend) {
         this.forefingerBend = forefingerBend;
     }
 
-    public void setMiddlefingerBend(float middlefingerBend) {
+    public void setMiddlefingerBend(double middlefingerBend) {
         this.middlefingerBend = middlefingerBend;
     }
 
-    public void setRingfingerBend(float ringfingerBend) {
+    public void setRingfingerBend(double ringfingerBend) {
         this.ringfingerBend = ringfingerBend;
     }
 
-    public void setLittlefingerBend(float littlefingerBend) {
+    public void setLittlefingerBend(double littlefingerBend) {
         this.littlefingerBend = littlefingerBend;
     }
 }

@@ -41,4 +41,28 @@ public class NNFactory {
 
         return neuralNetwork;
     }
+
+    public static NeuralNetwork getNeuralNetworkModel3() {
+        NeuralNetwork neuralNetwork = new NeuralNetwork();
+
+        neuralNetwork.addInputLayer(22);
+
+        int[][] parents_1 = {{0,1,2,3,4,5,6,7,8,9,10,11, 12,13,14,15,16,17,18,19,20,21},
+                {0,1,2,3,4,5,6,7,8,9,10,11, 12,13,14,15,16,17,18,19,20,21},
+                {0,1,2,3,4,5,6,7,8,9,10,11, 12,13,14,15,16,17,18,19,20,21}};
+        int[][] parents_2 = {{0, 1, 2},
+                {0, 1, 2}};
+        int[][] parents_3 = {{0, 1}};
+        try {
+            neuralNetwork.addLayer(3, parents_1);
+            neuralNetwork.addLayer(2, parents_2);
+            neuralNetwork.addLayer(1, parents_3);
+        } catch (NeuralNetwork.InvalidLayerException e) {
+            e.printStackTrace();
+        }
+
+        neuralNetwork.finalize();
+
+        return neuralNetwork;
+    }
 }

@@ -16,22 +16,15 @@ public class NNTrainer {
     }
 
     public void trainNN(ArrayList<Sample> samples) {
-        try {
-            network.train(samples.get(0).getAverageGesture(), new float[] {samples.get(0).getHash()});
-        } catch (NeuralNetwork.InvalidSampleException e) {
-            e.printStackTrace();
-        } catch (NeuralNetwork.InitializedNetworkException e) {
-            System.err.println("Error parsing sample: " + samples.get(0).getName());
-        }
-        /*for (Sample s: samples) {
+        for (Sample s: samples) {
             try {
-                network.train(s.getAverageGesture(), new float[] {s.getHash()});
+                network.train(s.getAverageGesture(), new double[] {s.getHash()});
             } catch (NeuralNetwork.InvalidSampleException e) {
                 e.printStackTrace();
             } catch (NeuralNetwork.InitializedNetworkException e) {
                 System.err.println("Error parsing sample: " + s.getName());
             }
-        }*/
+        }
 
     }
 }

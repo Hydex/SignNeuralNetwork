@@ -96,7 +96,7 @@ public class Cli {
 
             DBReader.getInstance().readHandGesture(sample, fileScanner);
 
-            float result = network.feedForward(sample.getAverageGesture())[0];
+            double result = network.feedForward(sample.getAverageGesture())[0];
 
             String bestBet = Intel.getInstance().getNearestRecord(result);
 

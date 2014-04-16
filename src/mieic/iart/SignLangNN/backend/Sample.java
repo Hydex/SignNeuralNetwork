@@ -8,46 +8,33 @@ import java.util.ArrayList;
 public class Sample {
 
     private String name;
-    private Float hash;
+    private Double hash;
     private ArrayList<HandGesture> rightHandGestures;
     private ArrayList<HandGesture> leftHandGestures;
-    private float[] averageGesture;
+    private double[] averageGesture;
 
     public Sample(String newName) {
         name = newName;
         rightHandGestures = new ArrayList<>();
         leftHandGestures = new ArrayList<>();
-        averageGesture = new float[22];
+        averageGesture = new double[22];
     }
 
-    public Float processName() {
-        hash = (float) 0.0;
-
-        for (int i = 0, j = 0; i < name.length(); i += 3, j += 1) {
-
-            hash = hash * (float) Math.pow(10, j);
-
-            switch (name.length() - i) {
-                case 0:
-                    break;
-                case 1:
-                    hash = hash + name.charAt(i) % 100;
-                    break;
-                case 2:
-                    hash = hash + (name.charAt(i) + name.charAt(i + 1)) % 100;
-                    break;
-                default:
-                    hash = hash + (name.charAt(i) + name.charAt(i + 1) + name.charAt(i + 2)) % 100;
-                    break;
-            }
+    public Double processName() {
+        hash = 7.0;
+        for (int i = 0; i < name.length(); i++) {
+            hash = hash * 7 + name.charAt(i);
         }
-        hash = hash / (float) Math.pow(10, 8);
-        System.out.println("HASH : " + hash);
+
+        hash = hash / Math.pow(10, 11);
+
+        System.out.println("HASH: " + hash);
+
         return hash;
     }
 
     public void processGesture() {
-        float[] values = new float[22];
+        double[] values = new double[22];
 
         int i = 0;
         for (; i < leftHandGestures.size(); i++) {
@@ -77,7 +64,7 @@ public class Sample {
         }
 
         for (int j = 0; j < averageGesture.length; j++) {
-            averageGesture[j] = values[j] / (float) i;
+            averageGesture[j] = values[j] / (double) i;
         }
     }
 
@@ -113,19 +100,19 @@ public class Sample {
         this.leftHandGestures = leftHandGestures;
     }
 
-    public float[] getAverageGesture() {
+    public double[] getAverageGesture() {
         return averageGesture;
     }
 
-    public void setAverageGesture(float[] newMediumGesture) {
+    public void setAverageGesture(double[] newMediumGesture) {
         averageGesture = newMediumGesture;
     }
 
-    public Float getHash() {
+    public Double getHash() {
         return hash;
     }
 
-    public void setHash(Float newHash) {
+    public void setHash(Double newHash) {
         hash = newHash;
     }
 }

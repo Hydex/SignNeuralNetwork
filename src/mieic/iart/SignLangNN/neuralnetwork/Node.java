@@ -10,8 +10,8 @@ import java.util.List;
  * Created by knoweat on 09/04/14.
  */
 public class Node {
-    private float value;
-    private float error;
+    private double value;
+    private double error;
 
     private List<Edge> sourceEdges;
     private List<Edge> destinationEdges;
@@ -47,17 +47,17 @@ public class Node {
         return true;
     }
 
-    public float getValue() {
+    public double getValue() {
         return value;
     }
 
-    public void setValue(float value) {
+    public void setValue(double value) {
         this.value = value;
         Log.log("Node's value set to: " + value);
     }
 
     public void receiveValue() {
-        float weightedSum = 0;
+        double weightedSum = 0;
 
         for (Edge e: sourceEdges) {
             weightedSum += e.outflowValue();
@@ -68,8 +68,8 @@ public class Node {
         value = weightedSum;
     }
 
-    public float getOutput() {
-        float feedVal = (float) (1.0 / (1.0 + Math.exp(- value)));
+    public double getOutput() {
+        double feedVal = (1.0 / (1.0 + Math.exp(- value)));
         return feedVal;
     }
 
@@ -81,13 +81,13 @@ public class Node {
 
 
     // training functions
-    public void setError(float error) {
+    public void setError(double error) {
         this.error = error;
         Log.log("Error set to: " + error);
     }
 
     public void calcError() {
-        float weightedSum = 0;
+        double weightedSum = 0;
 
         for (Edge e: destinationEdges) {
             weightedSum += e.backPropagateError();
@@ -97,7 +97,7 @@ public class Node {
         error = weightedSum;
     }
 
-    public float getError() {
+    public double getError() {
         return error;
     }
 

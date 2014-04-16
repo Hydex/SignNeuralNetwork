@@ -13,7 +13,7 @@ public class Intel {
 
     private static Intel sInstance = null;
     private ArrayList<Sample> samples;
-    private HashMap<String, Float> results;
+    private HashMap<String, Double> results;
 
     private Intel() {
         samples = new ArrayList<>();
@@ -43,12 +43,12 @@ public class Intel {
         samples.add(sample);
     }
 
-    public String getNearestRecord(float estimatedHash) {
+    public String getNearestRecord(double estimatedHash) {
 
-        float lowestError = Float.MAX_VALUE;
+        double lowestError = Double.MAX_VALUE;
         String bestBet = "none";
         for (int i = 0; i < results.size(); i++) {
-            float error = Math.abs(estimatedHash - (float) results.values().toArray()[i]);
+            double error = Math.abs(estimatedHash - (double) results.values().toArray()[i]);
             if (error < lowestError) {
                 lowestError = error;
                 bestBet = (String) results.keySet().toArray()[i];
