@@ -9,16 +9,16 @@ import java.util.List;
 /**
  * Created by knoweat on 09/04/14.
  */
-public class Network {
+public class NeuralNetwork {
 
-    static final float LEARNING_RATE = (float) 0.5; // 0 <= value <= 1
+    static final float LEARNING_RATE = (float) 0.01; // 0 <= value <= 1
 
     private List<List<Node>> nodes;
     private List<Edge> edges;
 
     private boolean isInitialized;
 
-    public Network() {
+    public NeuralNetwork() {
         nodes = new ArrayList<>();
         edges = new ArrayList<>();
         isInitialized = false;
@@ -31,7 +31,7 @@ public class Network {
         edges.clear();
         isInitialized = false;
 
-        Log.log("Network cleared");
+        Log.log("NeuralNetwork cleared");
     }
 
     public void addInputLayer(int nr) {
@@ -97,16 +97,16 @@ public class Network {
     public void finalize() {
         isInitialized = true;
 
-        Log.log("Network finalized");
+        Log.log("NeuralNetwork finalized");
     }
 
     public void train(float[] sample, float[] expectedResults) throws InvalidSampleException, InitializedNetworkException {
 
         // TODO: remove
-        Log.log("Network size: " + nodes.size());
+        Log.log("NeuralNetwork size: " + nodes.size());
 
         if (!isInitialized) {
-            Log.log("Network not properly initialized.");
+            Log.log("NeuralNetwork not properly initialized.");
             throw new InitializedNetworkException();
         }
 

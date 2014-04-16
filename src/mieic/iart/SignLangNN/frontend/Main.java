@@ -1,8 +1,9 @@
 package mieic.iart.SignLangNN.frontend;
 
 import mieic.iart.SignLangNN.backend.Intel;
+import mieic.iart.SignLangNN.backend.NNFactory;
 import mieic.iart.SignLangNN.backend.NNTrainer;
-import mieic.iart.SignLangNN.neuralnetwork.Network;
+import mieic.iart.SignLangNN.neuralnetwork.NeuralNetwork;
 
 /**
  * Created by wso277 on 4/14/14.
@@ -13,23 +14,13 @@ public class Main {
 
         Intel.getInstance().readDatabase();
 
-        Network neuralNetwork = new Network();
-
-        neuralNetwork.addInputLayer(22);
-
-        int[][] parents_1 = {{0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21}};
-        try {
-            neuralNetwork.addLayer(1, parents_1);
-        } catch (Network.InvalidLayerException e) {
-            e.printStackTrace();
-        }
-
-        neuralNetwork.finalize();
+        NeuralNetwork neuralNetwork = NNFactory.getNeuralNetworkModel2();
 
         NNTrainer trainer = new NNTrainer(neuralNetwork);
         trainer.trainNN(Intel.getInstance().getSamples());
 
         new Cli().menu(neuralNetwork);
     }
+
 
 }

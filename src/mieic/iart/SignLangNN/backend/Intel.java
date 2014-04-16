@@ -44,6 +44,7 @@ public class Intel {
     }
 
     public String getNearestRecord(float estimatedHash) {
+
         float lowestError = Float.MAX_VALUE;
         String bestBet = "none";
         for (int i = 0; i < results.size(); i++) {

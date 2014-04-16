@@ -3,7 +3,7 @@ package mieic.iart.SignLangNN.frontend;
 import mieic.iart.SignLangNN.backend.Intel;
 import mieic.iart.SignLangNN.backend.Sample;
 import mieic.iart.SignLangNN.database.DBReader;
-import mieic.iart.SignLangNN.neuralnetwork.Network;
+import mieic.iart.SignLangNN.neuralnetwork.NeuralNetwork;
 
 import java.io.*;
 import java.util.Scanner;
@@ -16,7 +16,7 @@ public class Cli {
     public Cli() {
     }
 
-    public void menu(Network network) {
+    public void menu(NeuralNetwork network) {
 
         Integer option = 0;
         while (option != 3) {
@@ -82,7 +82,7 @@ public class Cli {
         DBReader.getInstance().setFoldersNum(option);
     }
 
-    private void identifyGestureMenu(Network network) {
+    private void identifyGestureMenu(NeuralNetwork network) {
         System.out.println("Input the file directory:");
         Scanner consoleScanner = new Scanner(System.in);
         String filePath = consoleScanner.nextLine();
