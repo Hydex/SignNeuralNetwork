@@ -21,11 +21,28 @@ public class Sample {
     }
 
     public Float processName() {
-        hash = (float) 7.0;
-        for (int i = 0; i < name.length(); i++) {
-            hash = hash * 31 + name.charAt(i);
-        }
+        hash = (float) 0.0;
 
+        for (int i = 0, j = 0; i < name.length(); i += 3, j += 1) {
+
+            hash = hash * (float) Math.pow(10, j);
+
+            switch (name.length() - i) {
+                case 0:
+                    break;
+                case 1:
+                    hash = hash + name.charAt(i) % 100;
+                    break;
+                case 2:
+                    hash = hash + (name.charAt(i) + name.charAt(i + 1)) % 100;
+                    break;
+                default:
+                    hash = hash + (name.charAt(i) + name.charAt(i + 1) + name.charAt(i + 2)) % 100;
+                    break;
+            }
+        }
+        hash = hash / (float) Math.pow(10, 8);
+        System.out.println("HASH : " + hash);
         return hash;
     }
 
@@ -59,8 +76,8 @@ public class Sample {
             values[21] += rightHandGestures.get(i).getLittlefingerBend();
         }
 
-        for (int j=0; j < averageGesture.length;j++) {
-            averageGesture[j] = values[j] / (float)i;
+        for (int j = 0; j < averageGesture.length; j++) {
+            averageGesture[j] = values[j] / (float) i;
         }
     }
 
