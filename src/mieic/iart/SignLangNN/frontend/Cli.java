@@ -103,7 +103,7 @@ public class Cli {
             System.out.println("Neural network result: " + bestBet);
 
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.err.println("File doesn't exist.");
         }
     }
 }
