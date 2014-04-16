@@ -75,7 +75,7 @@ public class Edge {
 
     public void updateWeight() {
         double oldWeight = weight;
-        weight = weight + NeuralNetwork.LEARNING_RATE * destinationNode.getError() * (double) (Math.exp(sourceNode.getOutput())
+        weight = weight + NeuralNetwork.LEARNING_RATE * destinationNode.getError() * (Math.exp(sourceNode.getOutput())
                 / Math.pow(Math.exp(sourceNode.getOutput()) + 1, 2.0));
 
         Log.log("Weight changed from " + oldWeight + " to " + weight);

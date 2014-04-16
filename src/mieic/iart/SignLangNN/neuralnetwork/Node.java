@@ -57,7 +57,7 @@ public class Node {
     }
 
     public void receiveValue() {
-        double weightedSum = 0;
+        double weightedSum = 0.0;
 
         for (Edge e: sourceEdges) {
             weightedSum += e.outflowValue();

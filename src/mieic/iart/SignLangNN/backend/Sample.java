@@ -26,7 +26,14 @@ public class Sample {
             hash = hash * 7 + name.charAt(i);
         }
 
-        hash = hash / Math.pow(10, 11);
+        int decimals = 0;
+        double tmpHash = 0.0;
+        while(tmpHash > 1) {
+            tmpHash /= 10;
+            decimals++;
+        }
+
+        hash /= Math.pow(10, decimals);
 
         System.out.println("HASH: " + hash);
 

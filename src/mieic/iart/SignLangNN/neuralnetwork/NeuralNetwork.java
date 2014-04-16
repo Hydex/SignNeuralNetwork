@@ -194,11 +194,6 @@ public class NeuralNetwork {
                 n.backPropagateError();
             }
         }
-
-        // input layer
-        for(Node n: nodes.get(0)) {
-            n.calcError();
-        }
     }
 
     public static class InvalidLayerException extends Exception {
