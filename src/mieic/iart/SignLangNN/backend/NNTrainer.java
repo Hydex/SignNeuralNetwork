@@ -16,13 +16,22 @@ public class NNTrainer {
     }
 
     public void trainNN(ArrayList<Sample> samples) {
-
-        for (int i = 0; i < 3;i++) {
+        boolean networkFailing = true;
+        int i = 0;
+        while (networkFailing) {
+            System.out.println("Training: " + ++i);
+            networkFailing = false;
             for (Sample s : samples) {
                 try {
                     double[] expectedResult = new double[Intel.getInstance().getNrUniqueTerms()];
                     expectedResult[Intel.getInstance().getSampleIndex(s.getName()) - 1] = 1;
                     network.train(s.getAverageGesture(), expectedResult);
+
+                    double[] result = network.feedForward(s.getAverageGesture());
+                    if (!Intel.getInstance().getNearestRecord(result).equals(s.getName())) {
+                        networkFailing = true;
+                    }
+
                 } catch (NeuralNetwork.InvalidSampleException e) {
                     e.printStackTrace();
                 } catch (NeuralNetwork.InitializedNetworkException e) {
