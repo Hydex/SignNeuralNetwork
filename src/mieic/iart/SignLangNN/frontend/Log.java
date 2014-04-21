@@ -6,7 +6,7 @@ import java.sql.Timestamp;
  * Created by knoweat on 14/04/14.
  */
 public class Log {
-    public static boolean PRINT_LOGS = true;
+    public static boolean PRINT_LOGS = false;
 
     public static void log(String messg) {
         if (PRINT_LOGS) {

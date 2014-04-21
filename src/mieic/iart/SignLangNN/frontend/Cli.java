@@ -1,6 +1,8 @@
 package mieic.iart.SignLangNN.frontend;
 
 import mieic.iart.SignLangNN.backend.Intel;
+import mieic.iart.SignLangNN.backend.NNFactory;
+import mieic.iart.SignLangNN.backend.NNTrainer;
 import mieic.iart.SignLangNN.backend.Sample;
 import mieic.iart.SignLangNN.database.DBReader;
 import mieic.iart.SignLangNN.neuralnetwork.NeuralNetwork;
@@ -41,7 +43,7 @@ public class Cli {
 
             switch (option) {
                 case 1:
-                    newDatabaseMenu();
+                    newDatabaseMenu(network);
                     break;
                 case 2:
                     identifyGestureMenu(network);
@@ -55,7 +57,7 @@ public class Cli {
         }
     }
 
-    private void newDatabaseMenu() {
+    private void newDatabaseMenu(NeuralNetwork network) {
 
         System.out.print("\nInsert database path (example: database/tctodd): ");
 
@@ -80,6 +82,17 @@ public class Cli {
         }
 
         DBReader.getInstance().setFoldersNum(option);
+
+        Intel.getInstance().readDatabase();
+
+        network.clearNetwork();
+
+        network = NNFactory.getNeuralNetworkModel2();
+
+        NNTrainer trainer = new NNTrainer(network);
+
+        trainer.trainNN(Intel.getInstance().getSamples());
+
     }
 
     private void identifyGestureMenu(NeuralNetwork network) {

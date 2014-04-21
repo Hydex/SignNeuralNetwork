@@ -76,7 +76,6 @@ public class Intel {
         String bestBet = null;
         int size = result.length;
         for (int i = 0; i < size; i++) {
-            System.out.println("Name: " + uniqueTerms.get(i));
             if (result[i] > highestProb) {
                 bestBet = uniqueTerms.get(i);
                 highestProb = result[i];
