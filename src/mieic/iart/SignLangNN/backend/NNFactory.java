@@ -2,8 +2,6 @@ package mieic.iart.SignLangNN.backend;
 
 import mieic.iart.SignLangNN.neuralnetwork.NeuralNetwork;
 
-import java.util.ArrayList;
-
 /**
  * Created by knoweat on 14/04/14.
  */
@@ -89,15 +87,13 @@ public class NNFactory {
     }
 
     private static int[][] getOutputParents(int lastLayerSize, int nrOutputs) {
-        ArrayList<int[]> outputParents = new ArrayList<>();
+        int[][] outputParents = new int[nrOutputs][lastLayerSize];
         for (int i = 0; i < nrOutputs; i++) {
-            int[] childsParents = new int[lastLayerSize];
             for (int j = 0; j < lastLayerSize; j++) {
-                childsParents[j] = j;
+                outputParents[i][j] = j;
             }
-            outputParents.add(childsParents);
         }
 
-        return (int[][]) outputParents.toArray();
+        return outputParents;
     }
 }

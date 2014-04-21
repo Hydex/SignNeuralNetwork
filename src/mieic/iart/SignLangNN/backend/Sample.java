@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Sample {
 
-    public static final int DATA_SOURCES_NR = 12;
+    public static final int DATA_SOURCES_NR = 22;
 
     private String name;
     private ArrayList<HandGesture> rightHandGestures;

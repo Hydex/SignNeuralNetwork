@@ -17,17 +17,18 @@ public class NNTrainer {
 
     public void trainNN(ArrayList<Sample> samples) {
 
-        for (Sample s : samples) {
-            try {
-                double[] expectedResult = new double[Intel.getInstance().getNrUniqueTerms()];
-                expectedResult[Intel.getInstance().getSampleIndex(s.getName())] = 1;
-                network.train(s.getAverageGesture(), expectedResult);
-            } catch (NeuralNetwork.InvalidSampleException e) {
-                e.printStackTrace();
-            } catch (NeuralNetwork.InitializedNetworkException e) {
-                System.err.println("Error parsing sample: " + s.getName());
+        for (int i = 0; i < 3;i++) {
+            for (Sample s : samples) {
+                try {
+                    double[] expectedResult = new double[Intel.getInstance().getNrUniqueTerms()];
+                    expectedResult[Intel.getInstance().getSampleIndex(s.getName()) - 1] = 1;
+                    network.train(s.getAverageGesture(), expectedResult);
+                } catch (NeuralNetwork.InvalidSampleException e) {
+                    e.printStackTrace();
+                } catch (NeuralNetwork.InitializedNetworkException e) {
+                    System.err.println("Error parsing sample: " + s.getName());
+                }
             }
         }
-
     }
 }
