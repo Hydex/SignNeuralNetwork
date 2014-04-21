@@ -2,13 +2,11 @@ package mieic.iart.SignLangNN.backend;
 
 import java.util.ArrayList;
 
-/**
- * Created by knoweat on 07/04/14.
- */
 public class Sample {
 
+    public static final int DATA_SOURCES_NR = 12;
+
     private String name;
-    private Double hash;
     private ArrayList<HandGesture> rightHandGestures;
     private ArrayList<HandGesture> leftHandGestures;
     private double[] averageGesture;
@@ -18,26 +16,6 @@ public class Sample {
         rightHandGestures = new ArrayList<>();
         leftHandGestures = new ArrayList<>();
         averageGesture = new double[22];
-    }
-
-    public Double processName() {
-        hash = 7.0;
-        for (int i = 0; i < name.length(); i++) {
-            hash = hash * 7 + name.charAt(i);
-        }
-
-        int decimals = 0;
-        double tmpHash = 0.0;
-        while(tmpHash > 1) {
-            tmpHash /= 10;
-            decimals++;
-        }
-
-        hash /= Math.pow(10, decimals);
-
-        System.out.println("HASH: " + hash);
-
-        return hash;
     }
 
     public void processGesture() {
@@ -115,11 +93,4 @@ public class Sample {
         averageGesture = newMediumGesture;
     }
 
-    public Double getHash() {
-        return hash;
-    }
-
-    public void setHash(Double newHash) {
-        hash = newHash;
-    }
 }

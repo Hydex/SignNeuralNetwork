@@ -14,7 +14,7 @@ public class Main {
 
         Intel.getInstance().readDatabase();
 
-        NeuralNetwork neuralNetwork = NNFactory.getNeuralNetworkModel3();
+        NeuralNetwork neuralNetwork = NNFactory.getNeuralNetworkModel2();
 
         NNTrainer trainer = new NNTrainer(neuralNetwork);
         trainer.trainNN(Intel.getInstance().getSamples());

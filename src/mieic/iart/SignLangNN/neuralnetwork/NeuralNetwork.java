@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class NeuralNetwork {
 
-    static final double LEARNING_RATE = 0.01; // 0 <= value <= 1
+    static final double LEARNING_RATE = 0.3; // 0 <= value <= 1
 
     private List<List<Node>> nodes;
     private List<Edge> edges;
@@ -187,7 +187,7 @@ public class NeuralNetwork {
         }
 
         // middle layers
-        for (int j = nodes.size() - 1; j > 0; j--) {
+        for (int j = nodes.size() - 2; j > 0; j--) {
             List<Node> currentNodes = nodes.get(j);
             for (Node n: currentNodes) {
                 n.calcError();

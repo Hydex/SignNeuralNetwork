@@ -1,0 +1,7 @@
+-> change cost function to quadratic 					???? (see furder in the text)
+-> change number of outputs						V
+-> verify if nn is working with various outputs -> feedBackward 	V
+-> change function to choose correct answer				V
+-> create function to automate testing
+-> multiple passes by the same sample 					????
+-> modify hashing							V
