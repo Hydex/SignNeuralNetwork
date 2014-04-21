@@ -16,9 +16,12 @@ public class NNTrainer {
     }
 
     public void trainNN(ArrayList<Sample> samples) {
-        for (Sample s: samples) {
+
+        for (Sample s : samples) {
             try {
-                network.train(s.getAverageGesture(), new double[] {s.getHash()});
+                double[] expectedResult = new double[Intel.getInstance().getNrUniqueTerms()];
+                expectedResult[Intel.getInstance().getSampleIndex(s.getName())] = 1;
+                network.train(s.getAverageGesture(), expectedResult);
             } catch (NeuralNetwork.InvalidSampleException e) {
                 e.printStackTrace();
             } catch (NeuralNetwork.InitializedNetworkException e) {

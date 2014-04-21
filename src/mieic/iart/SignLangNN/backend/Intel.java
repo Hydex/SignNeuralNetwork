@@ -1,7 +1,6 @@
 package mieic.iart.SignLangNN.backend;
 
 import mieic.iart.SignLangNN.database.DBReader;
-import mieic.iart.SignLangNN.frontend.Log;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,11 +12,11 @@ public class Intel {
 
     private static Intel sInstance = null;
     private ArrayList<Sample> samples;
-    private HashMap<String, Double> results;
+    private ArrayList<String> uniqueTerms;
 
     private Intel() {
         samples = new ArrayList<>();
-        results = new HashMap<>();
+        uniqueTerms = new ArrayList<>();
     }
 
     public static Intel getInstance() {
@@ -30,8 +29,17 @@ public class Intel {
     public void readDatabase() {
         DBReader.getInstance().read();
 
-        for (int i=0; i < samples.size(); i++) {
-            results.put(samples.get(i).getName(), samples.get(i).processName());
+        for (Sample s : samples) {
+            boolean exists = false;
+            for (String name : uniqueTerms) {
+                if (name.equals(s.getName())) {
+                    exists = true;
+                    break;
+                }
+            }
+            if (!exists) {
+                uniqueTerms.add(s.getName());
+            }
         }
     }
 
@@ -43,19 +51,38 @@ public class Intel {
         samples.add(sample);
     }
 
-    public String getNearestRecord(double estimatedHash) {
+    public int getSampleIndex(String name) {
+        for (int i = 0; i < uniqueTerms.size(); i++) {
+            if (uniqueTerms.get(i).equals(name)) {
+                return i + 1;
+            }
+        }
+        return 0;
+    }
 
-        double lowestError = Double.MAX_VALUE;
-        String bestBet = "none";
-        for (int i = 0; i < results.size(); i++) {
-            double error = Math.abs(estimatedHash - (double) results.values().toArray()[i]);
-            if (error < lowestError) {
-                lowestError = error;
-                bestBet = (String) results.keySet().toArray()[i];
+    public int getNrUniqueTerms() {
+        return uniqueTerms.size();
+    }
+
+    public int getNrSampleDataSources() {
+        return Sample.DATA_SOURCES_NR;
+    }
+
+    public String getNearestRecord(double[] result) {
+        if (result.length != uniqueTerms.size()) {
+            return null;
+        }
+
+        double highestProb = 0.0;
+        String bestBet = null;
+        int size = result.length;
+        for (int i = 0; i < size; i++) {
+            if (result[i] > highestProb) {
+                bestBet = uniqueTerms.get(i);
+                highestProb = result[i];
             }
         }
 
-        Log.log("Bet: " + bestBet + "\nError: " + lowestError);
         return bestBet;
     }
 }

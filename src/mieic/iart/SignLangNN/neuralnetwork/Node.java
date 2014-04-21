@@ -87,7 +87,7 @@ public class Node {
     }
 
     public void calcError() {
-        double weightedSum = 0;
+        double weightedSum = 0.0;
 
         for (Edge e: destinationEdges) {
             weightedSum += e.backPropagateError();

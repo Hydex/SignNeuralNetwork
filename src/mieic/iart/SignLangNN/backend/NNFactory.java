@@ -2,6 +2,8 @@ package mieic.iart.SignLangNN.backend;
 
 import mieic.iart.SignLangNN.neuralnetwork.NeuralNetwork;
 
+import java.util.ArrayList;
+
 /**
  * Created by knoweat on 14/04/14.
  */
@@ -9,9 +11,9 @@ public class NNFactory {
     public static NeuralNetwork getNeuralNetworkModel1() {
         NeuralNetwork neuralNetwork = new NeuralNetwork();
 
-        neuralNetwork.addInputLayer(22);
+        neuralNetwork.addInputLayer(Intel.getInstance().getNrSampleDataSources());
 
-        int[][] parents = {{0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21}};
+        int[][] parents = {{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21}};
         try {
             neuralNetwork.addLayer(1, parents);
         } catch (NeuralNetwork.InvalidLayerException e) {
@@ -26,13 +28,26 @@ public class NNFactory {
     public static NeuralNetwork getNeuralNetworkModel2() {
         NeuralNetwork neuralNetwork = new NeuralNetwork();
 
-        neuralNetwork.addInputLayer(22);
+        neuralNetwork.addInputLayer(Intel.getInstance().getNrSampleDataSources());
 
-        int[][] parents_1 = {{0,1,2,3,4,5,6,7,8,9,10,11},{12,13,14,15,16,17,18,19,20,21}};
-        int[][] parents_2 = {{0, 1}};
+        int[][] parents_1 = {{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21},
+                {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21},
+                {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21},
+                {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21},
+                {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21},
+                {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21},
+                {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21},
+                {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21},
+                {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21},
+                {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21}};
+
         try {
-            neuralNetwork.addLayer(2, parents_1);
-            neuralNetwork.addLayer(1, parents_2);
+            // first hidden layer
+            neuralNetwork.addLayer(10, parents_1);
+
+            // output layer
+            int nrOutputs = Intel.getInstance().getNrUniqueTerms();
+            neuralNetwork.addLayer(nrOutputs, getOutputParents(10, nrOutputs));
         } catch (NeuralNetwork.InvalidLayerException e) {
             e.printStackTrace();
         }
@@ -45,17 +60,24 @@ public class NNFactory {
     public static NeuralNetwork getNeuralNetworkModel3() {
         NeuralNetwork neuralNetwork = new NeuralNetwork();
 
-        neuralNetwork.addInputLayer(22);
+        neuralNetwork.addInputLayer(Intel.getInstance().getNrSampleDataSources());
 
-        int[][] parents_1 = {{0,1,2,3,4,5,6,7,8,9,10,11, 12,13,14,15,16,17,18,19,20,21},
-                {0,1,2,3,4,5,6,7,8,9,10,11, 12,13,14,15,16,17,18,19,20,21},
-                {0,1,2,3,4,5,6,7,8,9,10,11, 12,13,14,15,16,17,18,19,20,21}};
-        int[][] parents_2 = {{0, 1, 2},
-                {0, 1, 2}};
-        int[][] parents_3 = {{0, 1}};
+        int[][] parents_1 = {{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21},
+                {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21},
+                {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21},
+                {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21},
+                {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21},
+                {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21},
+                {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21}};
+        int[][] parents_2 = {{0, 1, 2, 3, 4, 5, 6},
+                {0, 1, 2, 3, 4, 5, 6},
+                {0, 1, 2, 3, 4, 5, 6},
+                {0, 1, 2, 3, 4, 5, 6},
+                {0, 1, 2, 3, 4, 5, 6}};
+        int[][] parents_3 = {{0, 1, 2, 3, 4}};
         try {
-            neuralNetwork.addLayer(3, parents_1);
-            neuralNetwork.addLayer(2, parents_2);
+            neuralNetwork.addLayer(7, parents_1);
+            neuralNetwork.addLayer(5, parents_2);
             neuralNetwork.addLayer(1, parents_3);
         } catch (NeuralNetwork.InvalidLayerException e) {
             e.printStackTrace();
@@ -64,5 +86,18 @@ public class NNFactory {
         neuralNetwork.finalize();
 
         return neuralNetwork;
+    }
+
+    private static int[][] getOutputParents(int lastLayerSize, int nrOutputs) {
+        ArrayList<int[]> outputParents = new ArrayList<>();
+        for (int i = 0; i < nrOutputs; i++) {
+            int[] childsParents = new int[lastLayerSize];
+            for (int j = 0; j < lastLayerSize; j++) {
+                childsParents[j] = j;
+            }
+            outputParents.add(childsParents);
+        }
+
+        return (int[][]) outputParents.toArray();
     }
 }
