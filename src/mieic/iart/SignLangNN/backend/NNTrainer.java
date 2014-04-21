@@ -18,8 +18,9 @@ public class NNTrainer {
     public void trainNN(ArrayList<Sample> samples) {
         boolean networkFailing = true;
         int i = 0;
+        System.out.println("Training...");
         while (networkFailing) {
-            System.out.println("Training: " + ++i);
+            i++;
             networkFailing = false;
             for (Sample s : samples) {
                 try {
@@ -39,5 +40,6 @@ public class NNTrainer {
                 }
             }
         }
+        System.out.println("Trained " + i + "times.");
     }
 }

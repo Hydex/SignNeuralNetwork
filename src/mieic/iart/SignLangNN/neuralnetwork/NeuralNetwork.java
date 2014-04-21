@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class NeuralNetwork {
 
-    static final double LEARNING_RATE = 0.3; // 0 <= value <= 1
+    static final double LEARNING_RATE = 0.5; // 0 <= value <= 1
 
     private List<List<Node>> nodes;
     private List<Edge> edges;
@@ -56,7 +56,7 @@ public class NeuralNetwork {
             System.err.println("Netork already closed. Please clear it before adding layers");
             return;
         }
-        if (nr != parents.length ) {
+        if (nr != parents.length) {
             System.err.println("Invalid arguments. Please match size of parents with nr.");
             throw new InvalidLayerException();
         }
@@ -87,7 +87,7 @@ public class NeuralNetwork {
                 edges.add(edge);
 
                 Log.log("Added edge from [" + (nodes.size() - 2) + "][" + parents[i][j] + "] to ["
-                    + (nodes.size() - 1) + "][" + i + "]");
+                        + (nodes.size() - 1) + "][" + i + "]");
             }
             i++;
         }
@@ -124,7 +124,7 @@ public class NeuralNetwork {
         feedBackward(expectedResults, currentResults);
 
         // update network
-        for (Edge e: edges) {
+        for (Edge e : edges) {
             e.updateWeight();
         }
 
@@ -155,7 +155,7 @@ public class NeuralNetwork {
         // output neurons
         double[] retVals = new double[nodes.get(nodes.size() - 1).size()];
         int k = 0;
-        for (Node n: nodes.get(nodes.size() - 1)) {
+        for (Node n : nodes.get(nodes.size() - 1)) {
             n.receiveValue();
             retVals[k] = n.getOutput();
             k++;
@@ -174,13 +174,14 @@ public class NeuralNetwork {
         double[] outputErrors = new double[size];
 
         for (int i = 0; i < size; i++) {
+            //outputErrors[i] = Math.pow(expectedResults[i] - currentResults[i], 2.0) / 2.0;
             outputErrors[i] = expectedResults[i] - currentResults[i];
             Log.log("Error " + i + ": " + outputErrors[i]);
         }
 
         // output layer
         int i = 0;
-        for (Node n: nodes.get(nodes.size() - 1)) {
+        for (Node n : nodes.get(nodes.size() - 1)) {
             n.setError(outputErrors[i]);
             n.backPropagateError();
             i++;
@@ -189,7 +190,7 @@ public class NeuralNetwork {
         // middle layers
         for (int j = nodes.size() - 2; j > 0; j--) {
             List<Node> currentNodes = nodes.get(j);
-            for (Node n: currentNodes) {
+            for (Node n : currentNodes) {
                 n.calcError();
                 n.backPropagateError();
             }
