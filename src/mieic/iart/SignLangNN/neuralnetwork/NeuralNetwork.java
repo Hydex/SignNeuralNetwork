@@ -82,8 +82,6 @@ public class NeuralNetwork {
                 Node parent = nodes.get(nodes.size() - 2).get(parents[i][j]);
 
                 Edge edge = new Edge(parent, node);
-                parent.addDestinationEdge(edge);
-                node.addSourceEdge(edge);
                 edges.add(edge);
 
                 Log.log("Added edge from [" + (nodes.size() - 2) + "][" + parents[i][j] + "] to ["
@@ -194,6 +192,22 @@ public class NeuralNetwork {
                 n.calcError();
                 n.backPropagateError();
             }
+        }
+    }
+
+
+    public void addOutputNeuron() throws InitializedNetworkException {
+        if (!isInitialized) {
+            throw new InitializedNetworkException();
+        }
+
+        Node newOutputNode = new Node();
+        nodes.get(nodes.size() - 1).add(newOutputNode);
+
+        // add parent edges to recently added node
+        for (Node parent: nodes.get(nodes.size() - 2)) {
+            Edge e = new Edge(newOutputNode, parent);
+            edges.add(e);
         }
     }
 

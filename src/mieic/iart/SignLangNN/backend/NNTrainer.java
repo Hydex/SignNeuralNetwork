@@ -40,6 +40,6 @@ public class NNTrainer {
                 }
             }
         }
-        System.out.println("Trained " + i + "times.");
+        System.out.println("Trained " + i + " times.");
     }
 }

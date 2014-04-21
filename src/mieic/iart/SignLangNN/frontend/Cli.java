@@ -1,7 +1,6 @@
 package mieic.iart.SignLangNN.frontend;
 
 import mieic.iart.SignLangNN.backend.Intel;
-import mieic.iart.SignLangNN.backend.NNFactory;
 import mieic.iart.SignLangNN.backend.NNTrainer;
 import mieic.iart.SignLangNN.backend.Sample;
 import mieic.iart.SignLangNN.database.DBReader;
@@ -30,11 +29,11 @@ public class Cli {
 
             BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 
-            while(true) {
+            while (true) {
                 try {
                     option = Integer.parseInt(in.readLine());
                     break;
-                }catch (NumberFormatException e1) {
+                } catch (NumberFormatException e1) {
                     System.err.println("Invalid input.");
                 } catch (IOException e2) {
                     e2.printStackTrace();
@@ -57,6 +56,9 @@ public class Cli {
         }
     }
 
+    /**
+     * @param network
+     */
     private void newDatabaseMenu(NeuralNetwork network) {
 
         System.out.print("\nInsert database path (example: database/tctodd): ");
@@ -83,11 +85,11 @@ public class Cli {
 
         DBReader.getInstance().setFoldersNum(option);
 
-        Intel.getInstance().readDatabase();
-
-        network.clearNetwork();
-
-        network = NNFactory.getNeuralNetworkModel2();
+        try {
+            Intel.getInstance().readAdditionalDatabase(network);
+        } catch (NeuralNetwork.InitializedNetworkException e) {
+            e.printStackTrace();
+        }
 
         NNTrainer trainer = new NNTrainer(network);
 
