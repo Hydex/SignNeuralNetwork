@@ -20,11 +20,12 @@ public class Cli {
     public void menu(NeuralNetwork network) {
 
         Integer option = 0;
-        while (option != 3) {
+        while (option != 4) {
             System.out.println("\nSignNeuralNetwork Menu\n");
             System.out.println("1. Load new database");
             System.out.println("2. Identify a sample gesture");
-            System.out.println("3. Exit\n\n");
+            System.out.println("3. Test neural network");
+            System.out.println("4. Exit\n\n");
             System.out.print("Option: ");
 
             BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
@@ -48,6 +49,9 @@ public class Cli {
                     identifyGestureMenu(network);
                     break;
                 case 3:
+                    testNeuralNetworkProcess(network);
+                    break;
+                case 4:
                     break;
                 default:
                     System.out.println("Invalid Option. Try again.\n");
@@ -56,10 +60,28 @@ public class Cli {
         }
     }
 
-    /**
-     * @param network
-     */
+    private void testNeuralNetworkProcess(NeuralNetwork network) {
+        // TODO: verify thing with folders
+        float totalTest = 0, successTest = 0;
+
+        for (Sample s : Intel.getInstance().getSamples()) {
+            double[] result = network.feedForward(s.getAverageGesture());
+
+            String bestBet = Intel.getInstance().getNearestRecord(result);
+
+            if (bestBet.equals(s.getName())) {
+                successTest++;
+            }
+
+            totalTest++;
+        }
+
+        System.out.println("The neural network has a " + successTest * 100.0 / totalTest + "% success rate.");
+
+    }
+
     private void newDatabaseMenu(NeuralNetwork network) {
+        // TODO: verify thing with folders
 
         System.out.print("\nInsert database path (example: database/tctodd): ");
 
