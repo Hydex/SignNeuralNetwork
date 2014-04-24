@@ -31,11 +31,11 @@ public class Cli {
 
             BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 
-            while(true) {
+            while (true) {
                 try {
                     option = Integer.parseInt(in.readLine());
                     break;
-                }catch (NumberFormatException e1) {
+                } catch (NumberFormatException e1) {
                     System.err.println("Invalid input.");
                 } catch (IOException e2) {
                     e2.printStackTrace();
@@ -63,21 +63,62 @@ public class Cli {
 
     private void testNeuralNetworkProcess(NeuralNetwork network) {
 
-        int totalTest = 0, succesTest = 0;
+        float totalTest = 0.0f, successTest = 0.0f;
 
-        for (Sample s : Intel.getInstance().getSamples()) {
-            double[] result = network.feedForward(s.getAverageGesture());
+        System.out.print("\nInsert path to test folder: ");
 
-            String bestBet = Intel.getInstance().getNearestRecord(result);
+        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 
-            if (bestBet.equals(s.getName())) {
-                succesTest++;
-            }
-
-            totalTest++;
+        String path = "";
+        try {
+            path = in.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
-        System.out.println("The neural network has a " + succesTest * 100 / totalTest + "% success rate.");
+        File f = new File(path);
+
+        if (f.exists() && f.isDirectory()) {
+
+            for (final File gesture : f.listFiles()) {
+                Sample sample = null;
+                if (gesture.isFile()) {
+                    String gestureName = gesture.getName().split("-")[0].trim();
+                    sample = new Sample(gestureName);
+
+                    Scanner input = null;
+                    try {
+                        input = new Scanner(gesture);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+
+                    while (input.hasNextDouble()) {
+                        DBReader.getInstance().readHandGesture(sample, input);
+                    }
+
+                }
+
+                if (sample != null) {
+
+                    double[] result = network.feedForward(sample.getAverageGesture());
+
+                    String bestBet = Intel.getInstance().getNearestRecord(result);
+
+                    if (bestBet.equals(sample.getName())) {
+                        successTest++;
+                    }
+
+                    totalTest++;
+                }
+            }
+
+        }
+        else {
+            System.err.println("Not a valid path");
+        }
+
+        System.out.println("The neural network has a " + successTest * 100.0 / totalTest + "% success rate.");
 
     }
 
