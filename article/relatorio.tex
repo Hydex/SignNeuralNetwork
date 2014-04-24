@@ -1,0 +1,129 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{url}
+% arara: pdflatex: { synctex: on } 
+% arara: makeindex 
+% arara: pdflatex: { synctex: on } 
+\usepackage{makeidx} 
+
+\makeindex 
+
+
+\begin{document}
+
+\begin{figure}
+\centering
+\includegraphics[width=0.7\linewidth]{./LogoFeup}
+\end{figure}
+
+\title{\Huge\textbf{Redes Neuronais para Reconhecimento de Linguagem Gestual}\linebreak\linebreak\linebreak
+\Large\textbf{Relatório Intercalar}\linebreak\linebreak
+\Large{Inteligência Artificial}\linebreak
+\Large{3º ano do Mestrado Integrado em Engenharia Informática e Computação} \linebreak \linebreak}
+
+\author{\textbf{Elemenos do Grupo:}\\ Diogo Joaquim Pinto – 201108016 - ei11120@fe.up.pt \\ Luís Brochado Pinto dos Reis – 201003074 - ei11009@fe.up.pt \\ Wilson da Silva Oliveira - 201109281 - ei11085@fe.up.pt}
+\date{22 de abril de 2014}
+\maketitle
+
+\tableofcontents
+\newpage
+\section{Objetivo}
+\subitem
+
+Este projeto visa a criação de um programa que seja capaz de aprender e reconhecer linguagem gestual através da implementação de redes neuronais.
+
+\section{Descrição}
+
+\subsection{Pormenorização do projeto}
+\subitem
+
+Este projeto foca-se na criação de um programa que consiga treinar apropriadamente uma Rede Neuronal Artificial, a reconhecer linguagem gestual, usando o algoritmo "Back-Propagation". 
+
+O conjunto de dados deve ser cuidadosamente analizado de forma a verificar a eventual necessidade de pré-processamento. O modelo obtido deve depois ser utilizado na classificação de novos casos. 
+
+\subsection{Concepção de uma rede neuronal multi-camada}
+\subitem
+
+A camada de entrada contêm os atributos de identificação dos dados,11 parâmetros para o reconhecimento de cada mão, perfazendo um total de 22 parâmetos sendo eles:
+\begin{itemize}
+\item Posição X expressa em metros, em relação a um ponto ligeiramente abaixo do queixo;
+\item Posição Y expressa em metros, em relação a um ponto ligeiramente abaixo do queixo;
+\item Posição Z expressa em metros, em relação a um ponto ligeiramente abaixo do queixo;
+\item Rotação no eixo do X, medida num valor entre -0.5 e 0.5, sendo 0 a posição da palma da mão plana horizontalmente. Se o valor for positivo significa que a palma da mão está virada para cima na perspetiva do signatário. Para obter a medida em graus, multiplicar po 180;
+\item Rotação no eixo dos Y, medida num valor entre -1.0 e 1.0, sendo 0 a posição da palma para a frente na perspetiva do signatário;
+\item Curvatura do dedo polegar medida entre 0 e 1, sendo que 0 significa o dedo esticado e 1 o dedo totalmente dobrado;
+\item Curvatura do dedo indicador medida entre 0 e 1, sendo que 0 significa o dedo esticado e 1 o dedo totalmente dobrado;
+\item Curvatura do dedo médio medida entre 0 e 1, sendo que 0 significa o dedo esticado e 1 o dedo totalmente dobrado;
+\item Curvatura do dedo anelar medida entre 0 e 1, sendo que 0 significa o dedo esticado e 1 o dedo totalmente dobrado;
+\item Curvatura do dedo mindinho medida entre 0 e 1, sendo que 0 significa o dedo esticado e 1 o dedo totalmente dobrado.
+\end{itemize}
+\textbf{No entanto, as medidas de dobra dos dedos não são totalmente exatas}.
+
+Já a camada de saída contém a classificação obtida e a(s) camada(s) intermédia(s) auxilia(m) no funcionamento da rede neuronal.
+
+\subsection{Implementação/aplicação do algoritmo "Back-Propagation"}
+\subitem
+
+O algoritmo de "back-propagtion" propaga os parâmetros recebidos pela camada de entrada, aplicando-lhes uma função de transferência à medida que transmite os dados às camadas seguintes. Após chegar à camada de saída os dados são propagados para trás até à camada de entrada.
+
+Isto é, após o cálculo dos erros na camada de saída, os erros devem ser propagados para as camadas intermédias e à medida que o erro vai sendo propagado para trás, o peso das ligações entre camadas é alterado de modo a diminuir o erro. Este passo também é conhecido como "Treino" da rede.
+
+Atualizar o peso das ligações (é equivalente a minimizar o erro) é o modo de se reduzir para zero, ou aproximadamente zero, o erro na camada de saída, tornando a rede neuronal fidedigna.
+
+Este processo é feito através da função de custo quadrático e da sua derivada, sendo que a primeira é a função a minimizar no algoritmo de retropropagação (apresentando \textbf{\textit{x}} exemplos a um rede com \textbf{\textit{y}} saídas).
+
+
+\subsection{Medição detalhada de resultados nos dados de treino e de teste}
+\subitem
+
+Com a arquitetura atual, para 8 palavras a rede demora cerca de 160 iterações pela base de dados para ser propriamente ensinada.
+
+\subsection{Organização do projeto}
+\subitem
+
+O trabalho foi dividido em três partes. 
+A primeira consiste na criação da rede neuronal e aplicação do algoritmo de retropropagação ("Back-Propagation") e apresentar os resultados bem como as estatísitcas.
+A segunda parte baseia-se na otimização da primeira parte, de modo a obter respostas mais rapidamente.
+A terceira parte trata-se da implementação de funcionalidades adicionais, como por exemplo, uma GUI ou o reconhecimento de gestos através de imagens e/ou vídeo. Esta última parte será previamente discutida com os docentes da disciplina.
+
+O grupo está a considerar construir uma rede neuronal modular caso esta se demonstre uma opção útil na otimização do programa. Uma rede neuronal modular atribui determinada tarefa que inicialmente seria desempenhada por um ou vários neurónios, a uma outra "sub" rede neuronal contida na rede principal.
+\\ \\
+
+\section{Trabalho efetuado}
+\subitem
+
+A primeira parte do projeto, enunciada na alínea anterior, já se encontra completa, sendo que o grupo está a iniciar a segunda parte sendo para tal necessária a ajuda de um docente devido a algumas dúvidas que surgiram.
+
+
+\section{Resultados esperados e forma de avaliação}
+\subitem
+
+À medida que se forem realizando mais testes, o esperado é que o programa a cada chamada necessite de consutar menos pastas da base de dados do que na chamada anterior, pois assim verfica-se que a programa aprendeu o gesto com sucesso e é capaz de o identificar.
+
+\section{Conclusões}
+\subitem
+
+Com este projeto foi possível compreender o conceito de redes neuronais artificiais, bem como as pontencializações da sua utilidade na sociedade. Uma vez que o trabalho ainda não está completo o grupo tem grandes ambições em poder contribuir para a sociedade com este projeto, ajudando a melhorar a perceção de linguagem gestual bem como a identificação de gestos de um modo rápido e eficaz.
+
+\section{Recursos}
+
+O software utilizado foi o IDE IntelliJ IDEA 13.1.1, para programação em java.
+
+
+ \begin{thebibliography}{1}
+
+  \bibitem{slides} Eugénio Oliveira {\em Slides de IART: {\url{http://paginas.fe.up.pt/~eol/IA/1314/APONTAMENTOS/7_RN.pdf}}}  2013-2014.
+  
+  \bibitem{wiki} Wikipedia, Redes Neuronais Modulares {\em\url{http://en.wikipedia.org/wiki/Modular_neural_network}}.
+
+  \bibitem{livropt} Anabela Simões , Ernesto Costa {\em Inteligência Artificial} 2004: FCA - Editora Informática.
+  
+  \bibitem{livroen} Peter Norvig, Stuart Russell {\em Artificial Intelligence A Modern Approach } 2009: Prentice Hall.
+  \end{thebibliography}
+  \printindex
+\end{document}

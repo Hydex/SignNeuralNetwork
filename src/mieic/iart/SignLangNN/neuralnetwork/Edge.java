@@ -20,6 +20,9 @@ public class Edge {
         this.sourceNode = source;
         this.destinationNode = destination;
 
+        source.addDestinationEdge(this);
+        destination.addSourceEdge(this);
+
         Random r = new Random();
         weight = r.nextDouble() * 2 - 1;
         error = 0;

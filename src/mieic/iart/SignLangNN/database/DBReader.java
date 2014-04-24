@@ -16,6 +16,7 @@ public class DBReader {
     private static DBReader reader = null;
     private String databaseDir = "database/tctodd";
     private Integer foldersNum = 9;
+    private boolean isOriginalDatabase = true;
 
     public static DBReader getInstance() {
         if (reader == null) {
@@ -23,6 +24,10 @@ public class DBReader {
         }
 
         return reader;
+    }
+
+    public boolean isOriginalDatabase() {
+        return isOriginalDatabase;
     }
 
     public void read() {
@@ -39,6 +44,10 @@ public class DBReader {
                 }
 
             }
+        }
+
+        if (isOriginalDatabase) {
+            isOriginalDatabase = false;
         }
     }
 

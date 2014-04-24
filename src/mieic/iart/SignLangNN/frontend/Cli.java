@@ -1,7 +1,6 @@
 package mieic.iart.SignLangNN.frontend;
 
 import mieic.iart.SignLangNN.backend.Intel;
-import mieic.iart.SignLangNN.backend.NNFactory;
 import mieic.iart.SignLangNN.backend.NNTrainer;
 import mieic.iart.SignLangNN.backend.Sample;
 import mieic.iart.SignLangNN.database.DBReader;
@@ -65,6 +64,9 @@ public class Cli {
 
         float totalTest = 0.0f, successTest = 0.0f;
 
+        // TODO: verify thing with folders
+
+
         System.out.print("\nInsert path to test folder: ");
 
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
@@ -111,7 +113,6 @@ public class Cli {
 
                     totalTest++;
                 }
-            }
 
         }
         else {
@@ -123,6 +124,7 @@ public class Cli {
     }
 
     private void newDatabaseMenu(NeuralNetwork network) {
+        // TODO: verify thing with folders
 
         System.out.print("\nInsert database path (example: database/tctodd): ");
 
@@ -148,11 +150,11 @@ public class Cli {
 
         DBReader.getInstance().setFoldersNum(option);
 
-        Intel.getInstance().readDatabase();
-
-        network.clearNetwork();
-
-        network = NNFactory.getNeuralNetworkModel2();
+        try {
+            Intel.getInstance().readAdditionalDatabase(network);
+        } catch (NeuralNetwork.InitializedNetworkException e) {
+            e.printStackTrace();
+        }
 
         NNTrainer trainer = new NNTrainer(network);
 

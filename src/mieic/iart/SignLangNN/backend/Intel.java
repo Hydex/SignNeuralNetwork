@@ -1,6 +1,7 @@
 package mieic.iart.SignLangNN.backend;
 
 import mieic.iart.SignLangNN.database.DBReader;
+import mieic.iart.SignLangNN.neuralnetwork.NeuralNetwork;
 
 import java.util.ArrayList;
 
@@ -38,6 +39,26 @@ public class Intel {
             }
             if (!exists) {
                 uniqueTerms.add(s.getName());
+            }
+        }
+    }
+
+    public void readAdditionalDatabase(NeuralNetwork nn) throws NeuralNetwork.InitializedNetworkException {
+        DBReader.getInstance().read();
+
+        for (Sample s : samples) {
+            boolean exists = false;
+            for (String name : uniqueTerms) {
+                if (name.equals(s.getName())) {
+                    exists = true;
+                    break;
+                }
+            }
+            if (!exists) {
+                uniqueTerms.add(s.getName());
+                if (!DBReader.getInstance().isOriginalDatabase()) {
+                    nn.addOutputNeuron();
+                }
             }
         }
     }
