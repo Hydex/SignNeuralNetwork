@@ -3,7 +3,7 @@
 \usepackage[portuguese]{babel}
 \usepackage{amsmath}
 \usepackage{amsfonts}
-
+\usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage{url}
 % arara: pdflatex: { synctex: on } 
@@ -32,6 +32,47 @@
 
 \tableofcontents
 \newpage
+\section{Considerações gerais}
+No Séc. XIX dois psicólogos \textbf{(\textit{Alexander Bain e William James})} propuseram que o cérebro e a memória estavam organizados em redes de neurónios interligados. William James concluiu ainda que as ligações entre neurónios são ligações elétricas e que a memória é apenas um conjunto de \textbf{\textit{circuitos}} aprendidos.
+
+Um século depois, a ideia do duo de psicólogos foi utilizada para tentar criar máquinas que conseguissem aprender e "pensar" sem intervenção humana. Assim nasceu o conceito de \textbf{Rede Neuronal Artificial}, que é nada mais nada menos do que um programa criado pelo Homem para tentar simular o comportamento do sistema nervoso de forma a levar a máquina a raciocinar e tirar conclusões autonomamente.
+
+Após anos de trabalho chegou-se a um conseso relativamente à caraterização de uma rede neuronal. Este fica completamente caraterizada quando são conhecidas:
+\begin{itemize}
+\item A unidade básica (conhecida como neurónio artificial);
+\item A topologia da rede (estrutura das ligações desta);
+\item A regra de aprendizagem.
+\end{itemize}
+
+Mencionando o neurónio artificial, estamos preparados para falar das camadas das redes neuronais e dos diferentes tipos de ligações entre neurónios.
+Para abordar a topologia de uma rede é necessário compreender o conceito de camaada. Uma camada é um conjunto de neurónios que desempenham a mesma função.
+
+\subsection{Topologia da rede}
+Existem três tipos de topologia para uma rede neuronal. São eles
+\begin{itemize}
+\item \textbf{Redes totalmente conectadas}, em que cada neurónio da rede está ligado a todos os outros;
+\item \textbf{Redes de camada única}, que contém apenas camada de entrada e camada de saída;
+\item \textbf{Redes de múltiplas camadas}, que além das camadas de entrada e saída, também possuem uma ou mais camadas intermédias (também denominadas de camadas escondidas).
+\end{itemize}
+
+
+Uma rede neuronal é sempre constituída por duas camadas no mínimo, uma camada de entrada e uma camada de saída. Tal como os nomes indicam, a camada de entrada tem como objetivo receber informação e passá-la à camada de saída ou à(s) camada(s) intermédia(s). A camada de saída tem como função fornecer o resultado final. Já a camada intermédia, se existente, é responsável pela correção do resultado final em função do input da camada de entrada.
+
+Assim, podemos considerar as diferentes ligações entre neurónios:
+\begin{itemize}
+\item \textbf{Ligação direta}, são ligações um-a-um entre um neurónio de uma camada e da camada que se lhe procede, ou seja, neste caso o número de neurónios nas várias camadas tem de ser igual.
+\item \textbf{Ligação inter-direta}, as ligações entre camadas são múltiplas, ou seja, não existe relação um-a-um e o mesmo neurónio numa camada pode estar ligado a mais de um neurónio da camada que lhe precede.
+\item \textbf{Ligação intra-direta}, são ligações completas ou aleatórias entre nós da mesma camada.
+\end{itemize}
+
+Falta então mencionar os diferentes métodos de aprendizagem.
+
+\subsection{Tipos de aprendizagem}
+\begin{itemize}
+\item \textbf{Aprendizagem por Reforço};
+\item \textbf{Aprendizagem supervisionada};
+\item \textbf{Aprendizagem não supervisionada}.
+\end{itemize}
 \section{Objetivo}
 \subitem
 
@@ -44,7 +85,7 @@ Este projeto visa a criação de um programa que seja capaz de aprender e reconh
 
 Este projeto foca-se na criação de um programa que consiga treinar apropriadamente uma Rede Neuronal Artificial, a reconhecer linguagem gestual, usando o algoritmo "Back-Propagation". 
 
-Para a realização desta rede neuronal, tivemos acesso a uma base de dados que contém várias amostras de palavras da lingua gestual Australiana. Para a utilização desta base de dados, foi necessário o pré-processamento das medições contidas na mesma, para poder ser utilizada pela rede neuronal e servir como apoio na identificação de novos casos.
+O conjunto de dados deve ser cuidadosamente analizado de forma a verificar a eventual necessidade de pré-processamento. O modelo obtido deve depois ser utilizado na classificação de novos casos. 
 
 \subsection{Concepção de uma rede neuronal multi-camada}
 \subitem
@@ -62,13 +103,9 @@ A camada de entrada contêm os atributos de identificação dos dados,11 parâme
 \item Curvatura do dedo anelar medida entre 0 e 1, sendo que 0 significa o dedo esticado e 1 o dedo totalmente dobrado;
 \item Curvatura do dedo mindinho medida entre 0 e 1, sendo que 0 significa o dedo esticado e 1 o dedo totalmente dobrado.
 \end{itemize}
-%\textbf{No entanto, as medidas de dobra dos dedos não são totalmente exatas}.
+\textbf{No entanto, as medidas de dobra dos dedos não são totalmente exatas}.
 
-%Já a camada de saída contém a classificação obtida e a(s) camada(s) intermédia(s) auxilia(m) no funcionamento da rede neuronal.
-
-A camada de saída contém um número de nós igual ao número de gestos reconhecidos pela rede neuronal, estes nós têm como output uma probabilidade indicativa da confiança que a rede neuronal tem na sua decisão.
-
-A camada intermédia é utilizada para auxiliar os cálculos efetuados pela rede neuronal, sendo que ainda precisamos de ajustar e procurar a estrutura interna mais benéfica para a nossa rede neuronal.
+Já a camada de saída contém a classificação obtida e a(s) camada(s) intermédia(s) auxilia(m) no funcionamento da rede neuronal.
 
 \subsection{Implementação/aplicação do algoritmo "Back-Propagation"}
 \subitem
@@ -93,7 +130,7 @@ Com a arquitetura atual, para 8 palavras a rede demora cerca de 160 iterações 
 O trabalho foi dividido em três partes. 
 A primeira consiste na criação da rede neuronal e aplicação do algoritmo de retropropagação ("Back-Propagation") e apresentar os resultados bem como as estatísitcas.
 A segunda parte baseia-se na otimização da primeira parte, de modo a obter respostas mais rapidamente.
-A terceira parte trata-se da implementação de funcionalidades adicionais, como por exemplo, uma GUI ou o reconhecimento de gestos através de imagens e/ou vídeo. Esta última parte será posteriormente discutida com os docentes da disciplina.
+A terceira parte trata-se da implementação de funcionalidades adicionais, como por exemplo, uma GUI ou o reconhecimento de gestos através de imagens e/ou vídeo. Esta última parte será previamente discutida com os docentes da disciplina.
 
 O grupo está a considerar construir uma rede neuronal modular caso esta se demonstre uma opção útil na otimização do programa. Uma rede neuronal modular atribui determinada tarefa que inicialmente seria desempenhada por um ou vários neurónios, a uma outra "sub" rede neuronal contida na rede principal.
 \\ \\
@@ -101,14 +138,13 @@ O grupo está a considerar construir uma rede neuronal modular caso esta se demo
 \section{Trabalho efetuado}
 \subitem
 
-A primeira parte do projeto, enunciada na alínea anterior, já se encontra completa, sendo que o grupo está a iniciar a fase de otimização da rede neuronal, procurando obter um melhor desempenho, e resolver alguns problemas com a mesma.
+A primeira parte do projeto, enunciada na alínea anterior, já se encontra completa, sendo que o grupo está a iniciar a segunda parte sendo para tal necessária a ajuda de um docente devido a algumas dúvidas que surgiram.
 
 
 \section{Resultados esperados e forma de avaliação}
 \subitem
 
 À medida que se forem realizando mais testes, o esperado é que o programa a cada chamada necessite de consutar menos pastas da base de dados do que na chamada anterior, pois assim verfica-se que a programa aprendeu o gesto com sucesso e é capaz de o identificar.
-Para a utilização da rede neuronal, neste momento é necessário carregar um ficheiro com os valores inseridos manualmente para a rede neuronal poder identifica-lo. Esperamos que até à entrega final nos seja possivel implementar uma maneira mais amigável para o utilizador fazer uso desta rede neuronal.
 
 \section{Conclusões}
 \subitem

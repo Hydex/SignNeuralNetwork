@@ -1,0 +1,15 @@
+\select@language {portuguese}
+\contentsline {section}{\numberline {1}Considera\IeC {\c c}\IeC {\~o}es gerais}{3}
+\contentsline {subsection}{\numberline {1.1}Topologia da rede}{3}
+\contentsline {subsection}{\numberline {1.2}Tipos de aprendizagem}{4}
+\contentsline {section}{\numberline {2}Objetivo}{4}
+\contentsline {section}{\numberline {3}Descri\IeC {\c c}\IeC {\~a}o}{4}
+\contentsline {subsection}{\numberline {3.1}Pormenoriza\IeC {\c c}\IeC {\~a}o do projeto}{4}
+\contentsline {subsection}{\numberline {3.2}Concep\IeC {\c c}\IeC {\~a}o de uma rede neuronal multi-camada}{4}
+\contentsline {subsection}{\numberline {3.3}Implementa\IeC {\c c}\IeC {\~a}o/aplica\IeC {\c c}\IeC {\~a}o do algoritmo "Back-Propagation"}{5}
+\contentsline {subsection}{\numberline {3.4}Medi\IeC {\c c}\IeC {\~a}o detalhada de resultados nos dados de treino e de teste}{5}
+\contentsline {subsection}{\numberline {3.5}Organiza\IeC {\c c}\IeC {\~a}o do projeto}{6}
+\contentsline {section}{\numberline {4}Trabalho efetuado}{6}
+\contentsline {section}{\numberline {5}Resultados esperados e forma de avalia\IeC {\c c}\IeC {\~a}o}{6}
+\contentsline {section}{\numberline {6}Conclus\IeC {\~o}es}{6}
+\contentsline {section}{\numberline {7}Recursos}{6}
