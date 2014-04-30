@@ -3,13 +3,14 @@ package mieic.iart.SignLangNN.neuralnetwork;
 import com.sun.javafx.scene.control.skin.VirtualFlow;
 import mieic.iart.SignLangNN.frontend.Log;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by knoweat on 09/04/14.
  */
-public class Node {
+public class Node implements Serializable {
     private double value;
     private double error;
 

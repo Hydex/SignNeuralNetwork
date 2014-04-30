@@ -2,6 +2,7 @@ package mieic.iart.SignLangNN.neuralnetwork;
 
 import mieic.iart.SignLangNN.frontend.Log;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -9,9 +10,9 @@ import java.util.List;
 /**
  * Created by knoweat on 09/04/14.
  */
-public class NeuralNetwork {
+public class NeuralNetwork implements Serializable {
 
-    static final double LEARNING_RATE = 0.5; // 0 <= value <= 1
+    static final double LEARNING_RATE = 0.6; // 0 <= value <= 1
 
     private List<List<Node>> nodes;
     private List<Edge> edges;
@@ -174,7 +175,7 @@ public class NeuralNetwork {
         for (int i = 0; i < size; i++) {
             //outputErrors[i] = Math.pow(expectedResults[i] - currentResults[i], 2.0) / 2.0;
             outputErrors[i] = expectedResults[i] - currentResults[i];
-            Log.log("Error " + i + ": " + outputErrors[i]);
+            System.out.println("Error " + i + ": " + outputErrors[i]);
         }
 
         // output layer

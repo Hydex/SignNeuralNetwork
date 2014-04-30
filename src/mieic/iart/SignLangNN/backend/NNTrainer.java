@@ -18,9 +18,13 @@ public class NNTrainer {
     public void trainNN(ArrayList<Sample> samples) {
         boolean networkFailing = true;
         int i = 0;
+
+        long start = System.currentTimeMillis();
+
         System.out.println("Training...");
         while (networkFailing) {
             i++;
+            int j = 0;
             networkFailing = false;
             for (Sample s : samples) {
                 try {
@@ -31,6 +35,7 @@ public class NNTrainer {
                     double[] result = network.feedForward(s.getAverageGesture());
                     if (!Intel.getInstance().getNearestRecord(result).equals(s.getName())) {
                         networkFailing = true;
+                        j++;
                     }
 
                 } catch (NeuralNetwork.InvalidSampleException e) {
@@ -39,7 +44,12 @@ public class NNTrainer {
                     System.err.println("Error parsing sample: " + s.getName());
                 }
             }
+            System.out.println("Session: " + i + " errors: " + j);
         }
+
+        long end = System.currentTimeMillis();
+
         System.out.println("Trained " + i + " times.");
+        System.out.println("Elapsed " + ((float) (end - start) / 1000.0) + " seconds.");
     }
 }

@@ -114,8 +114,8 @@ public class Cli {
                     totalTest++;
                 }
 
-        }
-        else {
+            }
+        } else {
             System.err.println("Not a valid path");
         }
 

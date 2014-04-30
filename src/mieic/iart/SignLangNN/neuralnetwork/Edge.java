@@ -2,12 +2,13 @@ package mieic.iart.SignLangNN.neuralnetwork;
 
 import mieic.iart.SignLangNN.frontend.Log;
 
+import java.io.Serializable;
 import java.util.Random;
 
 /**
  * Created by knoweat on 09/04/14.
  */
-public class Edge {
+public class Edge implements Serializable {
 
     private Node sourceNode;
     private Node destinationNode;
@@ -78,7 +79,7 @@ public class Edge {
 
     public void updateWeight() {
         double oldWeight = weight;
-        weight = weight + NeuralNetwork.LEARNING_RATE * destinationNode.getError() * (Math.exp(destinationNode.getValue())
+        weight = oldWeight + NeuralNetwork.LEARNING_RATE * destinationNode.getError() * (Math.exp(destinationNode.getValue())
                 / Math.pow(Math.exp(destinationNode.getValue()) + 1, 2.0)) * sourceNode.getOutput();
 
         Log.log("Weight changed from " + oldWeight + " to " + weight);
