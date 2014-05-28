@@ -38,7 +38,7 @@ public class Main {
 
                 System.out.println("Error while reading from saved neural network. Starting fresh");
 
-                neuralNetwork = NNFactory.getNeuralNetworkModel2();
+                neuralNetwork = NNFactory.getNeuralNetworkModel3();
 
                 NNTrainer trainer = new NNTrainer(neuralNetwork);
                 trainer.trainNN(Intel.getInstance().getSamples());
@@ -53,7 +53,7 @@ public class Main {
 
             System.out.println("Fresh database");
 
-            neuralNetwork = NNFactory.getNeuralNetworkModel2();
+            neuralNetwork = NNFactory.getNeuralNetworkModel3();
 
             NNTrainer trainer = new NNTrainer(neuralNetwork);
             trainer.trainNN(Intel.getInstance().getSamples());

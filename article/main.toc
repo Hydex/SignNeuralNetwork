@@ -10,12 +10,12 @@
 \contentsline {subsection}{\numberline {2.3}Concep\IeC {\c c}\IeC {\~a}o de uma rede neuronal multi-camada}{5}
 \contentsline {subsection}{\numberline {2.4}Implementa\IeC {\c c}\IeC {\~a}o/aplica\IeC {\c c}\IeC {\~a}o do algoritmo \textit {Back-Propagation}}{5}
 \contentsline {subsection}{\numberline {2.5}Medi\IeC {\c c}\IeC {\~a}o detalhada de resultados nos dados de treino e de teste}{5}
-\contentsline {subsection}{\numberline {2.6}Organiza\IeC {\c c}\IeC {\~a}o do projeto}{5}
+\contentsline {subsection}{\numberline {2.6}Organiza\IeC {\c c}\IeC {\~a}o do projeto}{6}
 \contentsline {section}{\numberline {3}Poss\IeC {\'\i }veis Melhorias}{6}
 \contentsline {subsection}{\numberline {3.1}Modifica\IeC {\c c}\IeC {\~a}o do c\IeC {\'a}lculo do erro}{6}
 \contentsline {subsection}{\numberline {3.2}C\IeC {\'a}lculos atrav\IeC {\'e}s da GPU}{6}
 \contentsline {subsection}{\numberline {3.3}Vari\IeC {\^a}ncia como par\IeC {\^a}metro}{6}
 \contentsline {section}{\numberline {4}Trabalho efetuado}{6}
-\contentsline {section}{\numberline {5}Resultados esperados e forma de avalia\IeC {\c c}\IeC {\~a}o}{6}
+\contentsline {section}{\numberline {5}Resultados esperados e forma de avalia\IeC {\c c}\IeC {\~a}o}{7}
 \contentsline {section}{\numberline {6}Conclus\IeC {\~o}es}{7}
 \contentsline {section}{\numberline {7}Recursos}{7}

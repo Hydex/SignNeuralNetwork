@@ -70,7 +70,7 @@ Para possibilitar o teste da aplicação nos nossos computadores "modestos" util
 \subsection{Arquitectura da Rede Neuronal}
 
 Existem 3 tipos de de rede neuronal, redes totalmente conectadas, redes de camada única e redes de múltiplas camada.
-Optamos pela implementação de uma rede de camada múltipla, visto que os dados não são linearmente separáveis; e permitiria a implementação de sub-redes, caso o dataset permitisse a associação entre parâmetros, o que levaria a um incremento na eficiência da rede neuronal; e é a qual, dado ser mais comummente utilizada, tem mais heurísticas e recursos desenvolvidos.
+Optamos pela implementação de \textbf{redes de camada múltipla}, visto que os dados não são linearmente separáveis; e permitiria a implementação de sub-redes, caso o dataset permitisse a associação entre parâmetros, o que levaria a um incremento na eficiência da rede neuronal; e é a qual, dado ser mais comummente utilizada, tem mais heurísticas e recursos desenvolvidos.
 
 As camadas de entrada e de saída possuíam logo à partida valores fixos:
 \begin{itemize}
@@ -91,16 +91,23 @@ Dado isto, foram testadas inúmeras arquiteturas, incluindo redes totalmente con
 \item rotações no espaço da mão direita
 \item dois nós com todos os parâmetros
 \end{itemize}
-Após vários testes, acabamos com esta arquitetura como uma das finais: a outra é totalmente conexa e continha uma camada intermédia única de 5 nós.
+Após vários testes, acabamos com esta arquitetura como uma das finais: a outra é totalmente conexa e continha uma \textbf{camada intermédia única de 5 nós}.
 
 %TODO : pictures
 
 \subsubsection{Backpropagation}
 
-O algoritmo de backpropagation é um método do tipo feedforward.
-Dado isto, inicialmente propaga-se os parâmetros recebidos pela camada de entrada pelas ligações. Nas camadas intermédias e na camada de saída, aplicando-lhes uma função de transferência à medida que transmite os dados às camadas seguintes. 
+\begin{figure}[here]
+\centering
+\includegraphics{neuron.png}
+\caption{Exemplo de neurónio individual}
+\label{Figura 1}
+\end{figure}
 
-Chegando os \textit{impulsos} à camada de saída, informaç são retro-propagados para trás até à camada de entrada: após o cálculo dos erros na camada de saída, os erros devem ser propagados para as camadas intermédias e à medida que o erro vai sendo propagado para trás, o peso das ligações entre camadas é alterado de modo a diminuir o erro. Este passo também é conhecido como "Treino" da rede.
+O algoritmo de backpropagation é um método do tipo feedforward.
+Dado isto, inicialmente propaga-se os parâmetros recebidos na camada de entrada pelas ligações. Nas camadas intermédias e na camada de saída, om \textit{impulsos} são somados e em seguida aplica-se uma função de transferência à medida que transmite os dados às camadas seguintes. 
+
+Chegando os \textit{impulsos} à camada de saída, informação é retro-propagada para trás até à camada de entrada: após o cálculo dos erros na camada de saída, os erros são propagados para as camadas intermédias e à medida que o erro vai sendo propagado para trás, o peso das ligações entre camadas é alterado de modo a diminuir o erro. Este passo também é conhecido como "Treino" da rede.
 
 Atualizar o peso das ligações (é equivalente a minimizar o erro) é o modo de se reduzir para zero, ou aproximadamente zero, o erro na camada de saída, tornando a rede neuronal fidedigna.
 
