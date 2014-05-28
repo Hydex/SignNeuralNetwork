@@ -6,6 +6,7 @@ import mieic.iart.SignLangNN.backend.Sample;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Locale;
 import java.util.Scanner;
 
 /**
@@ -58,6 +59,7 @@ public class DBReader {
         Scanner in = null;
         try {
             in = new Scanner(gesture);
+            in.useLocale(Locale.US);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
