@@ -28,75 +28,26 @@
 
 \newpage
 
-\section{Introdução}
- 
- No Séc. XIX dois psicólogos \textbf{(\textit{Alexander Bain e William James})} propuseram que o cérebro e a memória estavam organizados em redes de neurónios interligados. William James concluiu ainda que as ligações entre neurónios são ligações elétricas e que a memória é apenas um conjunto de \textbf{\textit{circuitos}} aprendidos.
- 
- Um século depois, a ideia do duo de psicólogos foi utilizada para tentar criar máquinas que conseguissem aprender e "pensar" sem intervenção humana. Assim nasceu o conceito de \textbf{Rede Neuronal Artificial}, que é nada mais nada menos do que um programa criado pelo Homem para tentar simular o comportamento do sistema nervoso de forma a levar a máquina a raciocinar e tirar conclusões autonomamente.
- 
- Após anos de trabalho chegou-se a um conseso relativamente à caraterização de uma rede neuronal. Este fica completamente caraterizada quando são conhecidas:
- \begin{itemize}
- \item A unidade básica (conhecida como neurónio artificial);
- \item A topologia da rede (estrutura das ligações desta);
- \item A regra de aprendizagem.
- \end{itemize}
- 
- Mencionando o neurónio artificial, estamos preparados para falar das camadas das redes neuronais e dos diferentes tipos de ligações entre neurónios.
- Para abordar a topologia de uma rede é necessário compreender o conceito de camaada. Uma camada é um conjunto de neurónios que desempenham a mesma função.
- 
- \subsection{Topologia da rede}
- Existem três tipos de topologia para uma rede neuronal. São eles
- \begin{itemize}
- \item \textbf{Redes totalmente conectadas}, em que cada neurónio da rede está ligado a todos os outros;
- \item \textbf{Redes de camada única}, que contém apenas camada de entrada e camada de saída;
- \item \textbf{Redes de múltiplas camadas}, que além das camadas de entrada e saída, também possuem uma ou mais camadas intermédias (também denominadas de camadas escondidas).
- \end{itemize}
- 
- 
- Uma rede neuronal é sempre constituída por duas camadas no mínimo, uma camada de entrada e uma camada de saída. Tal como os nomes indicam, a camada de entrada tem como objetivo receber informação e passá-la à camada de saída ou à(s) camada(s) intermédia(s). A camada de saída tem como função fornecer o resultado final. Já a camada intermédia, se existente, é responsável pela correção do resultado final em função do input da camada de entrada.
- 
- Assim, podemos considerar as diferentes ligações entre neurónios:
- \begin{itemize}
- \item \textbf{Ligação direta}, são ligações um-a-um entre um neurónio de uma camada e da camada que se lhe procede, ou seja, neste caso o número de neurónios nas várias camadas tem de ser igual.
- \item \textbf{Ligação inter-direta}, as ligações entre camadas são múltiplas, ou seja, não existe relação um-a-um e o mesmo neurónio numa camada pode estar ligado a mais de um neurónio da camada que lhe precede.
- \item \textbf{Ligação intra-direta}, são ligações completas ou aleatórias entre nós da mesma camada.
- \end{itemize}
- 
- Falta então mencionar os diferentes métodos de aprendizagem.
- 
- \subsection{Tipos de aprendizagem}
- \begin{itemize}
- \item \textbf{Aprendizagem por Reforço};
- \item \textbf{Aprendizagem supervisionada};
- \item \textbf{Aprendizagem não supervisionada}.
- \end{itemize}
- 
- O método de aprendizagem escolhido para este projeto foi o de aprendizagem supervisionada. Com este método de aprendizagem a rede produz a uma resposta ao input, após o que um "supervisor" apresenta como resposta correta. Caso as respostas sejam diferentes, a diferença estre as duas respostas é utilizada para modificar o peso das ligações existentes.
-
-\newpage
-
 \section{Objetivo}
-\subitem
 
-Este projeto visa a criação de um programa que seja capaz de aprender e reconhecer linguagem gestual através da implementação de redes neuronais.
+Este projeto visa a criação de um programa que seja capaz de aprender e reconhecer a linguagem gestual Australiana  (Auslan), utilizando dados com origem numa camera e num par de luvas com capacidade de efetuar medições de alta precisão, recorrendo às capacidades de aprendizagem não-simbólica das redes neuronais.
 
 \section{Descrição}
 
-\subsection{Pormenorização do projeto}
-\subitem
+\subsection{Dataset}
 
-Este projeto foca-se na criação de um programa que consiga treinar apropriadamente uma Rede Neuronal Artificial, a reconhecer linguagem gestual, usando o algoritmo "Back-Propagation". 
+\subsubsection{Normalização dos dados}
 
-Para a realização desta rede neuronal, tivemos acesso a uma base de dados que contém várias amostras de palavras da lingua gestual Australiana. Para a utilização desta base de dados, foi necessário o pré-processamento das medições contidas na mesma, para poder ser utilizada pela rede neuronal e servir como apoio na identificação de novos casos.
+O dataset utilizado para esta aplicação não requeria normalização adicional, uma vez que os dados fornecidos já se encontram normalizados. 
 
-\subsection{Concepção de uma rede neuronal multi-camada}
-\subitem
+\subsubsection{Parâmetros}
 
-A camada de entrada contêm os atributos de identificação dos dados,11 parâmetros para o reconhecimento de cada mão, perfazendo um total de 22 parâmetos sendo eles:
+Através da utilização da camera e das luvas de medição foram obtidos onze parâmetros diferentes para cada mão, perfazendo um total de vinte e dois parâmetros que serão processados pela aplicação.
+
 \begin{itemize}
-\item Posição X expressa em metros, em relação a um ponto ligeiramente abaixo do queixo;
-\item Posição Y expressa em metros, em relação a um ponto ligeiramente abaixo do queixo;
-\item Posição Z expressa em metros, em relação a um ponto ligeiramente abaixo do queixo;
+\item Posição X expressa em metros, em relação a uma origem definida ligeiramente abaixo do queixo;
+\item Posição Y expressa em metros, em relação a uma origem definida ligeiramente abaixo do queixo;
+\item Posição Z expressa em metros, em relação a uma origem definida ligeiramente abaixo do queixo;
 \item Rotação no eixo do X, medida num valor entre -0.5 e 0.5, sendo 0 a posição da palma da mão plana horizontalmente. Se o valor for positivo significa que a palma da mão está virada para cima na perspetiva do signatário. Para obter a medida em graus, multiplicar po 180;
 \item Rotação no eixo dos Y, medida num valor entre -1.0 e 1.0, sendo 0 a posição da palma para a frente na perspetiva do signatário;
 \item Curvatura do dedo polegar medida entre 0 e 1, sendo que 0 significa o dedo esticado e 1 o dedo totalmente dobrado;
@@ -105,24 +56,86 @@ A camada de entrada contêm os atributos de identificação dos dados,11 parâme
 \item Curvatura do dedo anelar medida entre 0 e 1, sendo que 0 significa o dedo esticado e 1 o dedo totalmente dobrado;
 \item Curvatura do dedo mindinho medida entre 0 e 1, sendo que 0 significa o dedo esticado e 1 o dedo totalmente dobrado.
 \end{itemize}
-%\textbf{No entanto, as medidas de dobra dos dedos não são totalmente exatas}.
+\textbf{É assinalado na fonte da base de dados que as medidas de dobra dos dedos não são totalmente exatas}.
 
-%Já a camada de saída contém a classificação obtida e a(s) camada(s) intermédia(s) auxilia(m) no funcionamento da rede neuronal.
+\subsubsection{Processamento do Dataset}
 
-A camada de saída contém um número de nós igual ao número de gestos reconhecidos pela rede neuronal, estes nós têm como output uma probabilidade indicativa da confiança que a rede neuronal tem na sua decisão.
+A base de dados contém um total de noventa e cinco palavras com vinte e sete amostras para cada uma totalizando assim dois mil quinhentos e sessenta e cinco amostras.
+Cada amostra contém em média sessenta medições únicas (correspondentes aos frames captados pelos dispositivos de medição) dos vinte e dois parâmetros especificados anteriormente.
+Dado o elevado número de dados optamos por processar a média destes valores, numa tentativa de reduzir a carga sobre a rede neuronal, mas com o cuidado de garantir valores únicos para cada palavra diferente. Para tentar eliminar os frames menos essenciais para o gesto (que seriam os frames iniciais e finais), optamos por eliminar estes do cálculo da média final.
 
-A camada intermédia é utilizada para auxiliar os cálculos efetuados pela rede neuronal, sendo que ainda precisamos de ajustar e procurar a estrutura interna mais benéfica para a nossa rede neuronal.
+Para possibilitar o teste da aplicação nos nossos computadores "modestos" utilizamos uma versão reduzida da base de dados com apenas 8 palavras ao invés das 95 disponibilizadas. Não consideramos tal prejudicial visto que isto é uma \textit{proof of concept}
 
-\subsection{Implementação/aplicação do algoritmo \textit{Back-Propagation}}
-\subitem
+\subsection{Arquitectura da Rede Neuronal}
 
-O algoritmo de "back-propagtion" propaga os parâmetros recebidos pela camada de entrada, aplicando-lhes uma função de transferência à medida que transmite os dados às camadas seguintes. Após chegar à camada de saída os dados são propagados para trás até à camada de entrada.
+Existem 3 tipos de de rede neuronal, redes totalmente conectadas, redes de camada única e redes de múltiplas camada.
+Optamos pela implementação de uma rede de camada múltipla, visto que os dados não são linearmente separáveis; e permitiria a implementação de subredes, caso o dataset permitisse a associação entre parâmetros, o que levaria a um incremento na eficiência da rede neuronal; e é a qual, dado ser mais comummente utilizada, tem mais heurísticas e recursos desenvolvidos.
+
+Após investigação sobre o tema com especialistas, não foi possível concluir qualquer associação entre os parâmetros relevantes.
+
+Dado isto, foram testadas inúmeras arquiteturas: numa delas, como tentativa de agregação de informação, a camada intermédia recebia os dados dos nós da camada de entrada como se segue:
+\begin{itemize}
+\item posição (x, y, z) das duas mãos
+\item dobra dos dedos polegar, indicador e médio da mão esquerda
+\item dobra dos dedos polegar, indicador e médio da mão direita
+\item dobra dos dedos anelar e mindinho da mão esquerda
+\item dobra dos dedos anelar e mindinho da mão direita
+\item rotações no espaço da mão esquerda
+\item rotações no espaço da mão direita
+\item dois nós com todos os parâmetros
+\end{itemize}
+Após vários testes, concluiu-se que esta arquitetura não trazia qualquer vantagem, quer em tempos de tempo de treino quer em resultados, acabando por recorrer a uma rede com camada intermédia única de 5 nós que recebiam os \textit{impulsos} de todos os nós da entrada e os enviavam para todos os nós da saída.
+
+\subsubsection{Backpropagation}
+
+O algoritmo de backpropagation é um método do tipo feedforward.
+Dado isto, inicialmente propapa-se os parâmetros recebidos pela camada de entrada pelas ligações. Nas camadas intermédias e na camada de saída, aplicando-lhes uma função de transferência à medida que transmite os dados às camadas seguintes. Após chegar à camada de saída os dados são propagados para trás até à camada de entrada.
 
 Isto é, após o cálculo dos erros na camada de saída, os erros devem ser propagados para as camadas intermédias e à medida que o erro vai sendo propagado para trás, o peso das ligações entre camadas é alterado de modo a diminuir o erro. Este passo também é conhecido como "Treino" da rede.
 
 Atualizar o peso das ligações (é equivalente a minimizar o erro) é o modo de se reduzir para zero, ou aproximadamente zero, o erro na camada de saída, tornando a rede neuronal fidedigna.
 
 Este processo é feito através da função de custo quadrático e da sua derivada, sendo que a primeira é a função a minimizar no algoritmo de retropropagação (apresentando \textbf{\textit{x}} exemplos a um rede com \textbf{\textit{y}} saídas).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Concepção de uma rede neuronal multi-camada}
+\subitem
+
+
+
+\subsection{Implementação/aplicação do algoritmo \textit{Back-Propagation}}
+\subitem
+
+
 
 
 \subsection{Medição detalhada de resultados nos dados de treino e de teste}
@@ -140,6 +153,16 @@ A terceira parte trata-se da implementação de funcionalidades adicionais, como
 
 O grupo está a considerar construir uma rede neuronal modular caso esta se demonstre uma opção útil na otimização do programa. Uma rede neuronal modular atribui determinada tarefa que inicialmente seria desempenhada por um ou vários neurónios, a uma outra "sub" rede neuronal contida na rede principal.
 \\ \\
+
+\section{Possiveis Melhorias}
+\subsection{Modificação do cálculo do erro}
+A inclusão no cálculo do erro de uma iteração de aprendizagem pela rede neuronal da derivada da função sigmóide levaria a uma aprendizagem acelerada nos valores intermédios e lenta perto dos valores limite (0 e 1), sendo que um exemplo já aprendido, no backpropagation não iria alterar em demasia os valores dos pesos, contribuindo para a estabilidade da rede. 
+
+\subsection{Cálculos através da gpu}
+Uma hipótese de aumentar a rapidez de treino da base de dados seria implementar a execução dos cálculos através da gpu do computador.
+
+\subsection{Variância como parâmetro}
+Uma vez que os dados de input são a média das medições dos parâmetros das amostras, a adição do input das variâncias dos respectivos cálculos poderia ser uma mais valia na distinção entre amostras de movimentos dinâmicos e de estáticos.
 
 \section{Trabalho efetuado}
 \subitem
