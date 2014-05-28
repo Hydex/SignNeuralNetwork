@@ -123,27 +123,27 @@ public class HandGesture {
     }
 
     public void setX(double x) {
-        this.x = x;
+        this.x = Math.abs(x);
     }
 
     public void setY(double y) {
-        this.y = y;
+        this.y = Math.abs(y);
     }
 
     public void setZ(double z) {
-        this.z = z;
+        this.z = Math.abs(z);
     }
 
     public void setRoll(double roll) {
-        this.roll = roll;
+        this.roll = (roll + 0.5) / 2.0 ;
     }
 
     public void setPitch(double pitch) {
-        this.pitch = pitch;
+        this.pitch = (pitch + 0.5) / 2.0;
     }
 
     public void setYaw(double yaw) {
-        this.yaw = yaw;
+        this.yaw = (yaw + 1.0) / 2.0;
     }
 
     public void setThumbBend(double thumbBend) {
