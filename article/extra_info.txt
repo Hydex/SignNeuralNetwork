@@ -1,0 +1,28 @@
+ \subsection{Topologia da rede}
+ Existem três tipos de topologia para uma rede neuronal. São eles
+ \begin{itemize}
+ \item \textbf{Redes totalmente conectadas}, em que cada neurónio da rede está ligado a todos os outros;
+ \item \textbf{Redes de camada única}, que contém apenas camada de entrada e camada de saída;
+ \item \textbf{Redes de múltiplas camadas}, que além das camadas de entrada e saída, também possuem uma ou mais camadas intermédias (também denominadas de camadas escondidas).
+ \end{itemize}
+ 
+ 
+ Uma rede neuronal é sempre constituída por duas camadas no mínimo, uma camada de entrada e uma camada de saída. Tal como os nomes indicam, a camada de entrada tem como objetivo receber informação e passá-la à camada de saída ou à(s) camada(s) intermédia(s). A camada de saída tem como função fornecer o resultado final. Já a camada intermédia, se existente, é responsável pela correção do resultado final em função do input da camada de entrada.
+ 
+ Assim, podemos considerar as diferentes ligações entre neurónios:
+ \begin{itemize}
+ \item \textbf{Ligação direta}, são ligações um-a-um entre um neurónio de uma camada e da camada que se lhe procede, ou seja, neste caso o número de neurónios nas várias camadas tem de ser igual.
+ \item \textbf{Ligação inter-direta}, as ligações entre camadas são múltiplas, ou seja, não existe relação um-a-um e o mesmo neurónio numa camada pode estar ligado a mais de um neurónio da camada que lhe precede.
+ \item \textbf{Ligação intra-direta}, são ligações completas ou aleatórias entre nós da mesma camada.
+ \end{itemize}
+ 
+ Falta então mencionar os diferentes métodos de aprendizagem.
+ 
+ \subsection{Tipos de aprendizagem}
+ \begin{itemize}
+ \item \textbf{Aprendizagem por Reforço};
+ \item \textbf{Aprendizagem supervisionada};
+ \item \textbf{Aprendizagem não supervisionada}.
+ \end{itemize}
+ 
+ O método de aprendizagem escolhido para este projeto foi o de aprendizagem supervisionada. Com este método de aprendizagem a rede produz a uma resposta ao input, após o que um "supervisor" apresenta como resposta correta. Caso as respostas sejam diferentes, a diferença estre as duas respostas é utilizada para modificar o peso das ligações existentes.
