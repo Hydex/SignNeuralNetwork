@@ -2,6 +2,9 @@ package mieic.iart.SignLangNN.neuralnetwork;
 
 import mieic.iart.SignLangNN.frontend.Log;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,7 +15,7 @@ import java.util.List;
  */
 public class NeuralNetwork implements Serializable {
 
-    static final double LEARNING_RATE = 0.6; // 0 <= value <= 1
+    static final double LEARNING_RATE = 0.3; // 0 <= value <= 1
 
     private List<List<Node>> nodes;
     private List<Edge> edges;
@@ -208,6 +211,20 @@ public class NeuralNetwork implements Serializable {
         for (Node parent: nodes.get(nodes.size() - 2)) {
             Edge e = new Edge(newOutputNode, parent);
             edges.add(e);
+        }
+    }
+
+    public void saveToFile() {
+        try {
+            FileOutputStream fileOut = new FileOutputStream("neuralnet.ser");
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(this);
+            out.close();
+            fileOut.close();
+
+            Log.log("Database Saved");
+        } catch (IOException i) {
+            Log.log("Could not save database");
         }
     }
 

@@ -95,7 +95,7 @@ public class Node implements Serializable {
         }
 
         Log.log("Error resulting from weighted edges errors set to: " + weightedSum);
-        error = value * (1 - value) * weightedSum;
+        error = /*value * (1 - value) **/ weightedSum;
     }
 
     public double getError() {

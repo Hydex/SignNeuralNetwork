@@ -21,8 +21,8 @@ public class Sample {
     public void processGesture() {
         double[] values = new double[22];
 
-        int i = 0;
-        for (; i < leftHandGestures.size(); i++) {
+        int i = 10;
+        for (; i < leftHandGestures.size() - 10; i++) {
             values[0] += leftHandGestures.get(i).getX();
             values[1] += leftHandGestures.get(i).getY();
             values[2] += leftHandGestures.get(i).getZ();

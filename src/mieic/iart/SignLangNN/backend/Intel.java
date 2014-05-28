@@ -94,15 +94,21 @@ public class Intel {
         }
 
         double highestProb = 0.0;
+        double secondBest = 0.0;
         String bestBet = null;
         int size = result.length;
         for (int i = 0; i < size; i++) {
             if (result[i] > highestProb) {
                 bestBet = uniqueTerms.get(i);
+                secondBest = highestProb;
                 highestProb = result[i];
             }
         }
 
-        return bestBet;
+        if (highestProb - secondBest < 0.3) {
+            return "";
+        } else {
+            return bestBet;
+        }
     }
 }
