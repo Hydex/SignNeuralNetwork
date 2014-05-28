@@ -36,16 +36,15 @@ public class NNFactory {
                 {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21},
                 {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21},
                 {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21},
-                {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21},
                 {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21}};
 
         try {
             // first hidden layer
-            neuralNetwork.addLayer(10, parents_1);
+            neuralNetwork.addLayer(9, parents_1);
 
             // output layer
             int nrOutputs = Intel.getInstance().getNrUniqueTerms();
-            neuralNetwork.addLayer(nrOutputs, getOutputParents(10, nrOutputs));
+            neuralNetwork.addLayer(nrOutputs, getOutputParents(9, nrOutputs));
         } catch (NeuralNetwork.InvalidLayerException e) {
             e.printStackTrace();
         }
