@@ -15,7 +15,7 @@ public class DBReader {
 
     private static DBReader reader = null;
     private String databaseDir = "database_simplified/tctodd";
-    private Integer foldersNum = 4;
+    private Integer foldersNum = 7;
     private boolean isOriginalDatabase = true;
 
     public static DBReader getInstance() {

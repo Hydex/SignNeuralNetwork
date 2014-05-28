@@ -173,9 +173,8 @@ public class NeuralNetwork implements Serializable {
         double[] outputErrors = new double[size];
 
         for (int i = 0; i < size; i++) {
-            //outputErrors[i] = Math.pow(expectedResults[i] - currentResults[i], 2.0) / 2.0;
-            outputErrors[i] = expectedResults[i] - currentResults[i];
-            System.out.println("Error " + i + ": " + outputErrors[i]);
+            outputErrors[i] = /*currentResults[i] * (1 - currentResults[i]) * */(expectedResults[i] - currentResults[i]);
+            Log.log("Error " + i + ": " + outputErrors[i]);
         }
 
         // output layer
