@@ -6,13 +6,14 @@
 \usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage{url}
-% arara: pdflatex: { synctex: on } 
-% arara: makeindex 
-% arara: pdflatex: { synctex: on } 
 \usepackage{makeidx} 
 
-\makeindex 
-
+\title{\Huge\textbf{Redes Neuronais para Reconhecimento de Linguagem Gestual}\linebreak\linebreak\linebreak
+\Large\textbf{Relatório Intercalar}\linebreak\linebreak
+\Large{Inteligência Artificial}\linebreak
+\Large{3º ano do Mestrado Integrado em Engenharia Informática e Computação} \linebreak \linebreak}
+\author{\textbf{Elemenos do Grupo:}\\ Diogo Joaquim Pinto – 201108016 - ei11120@fe.up.pt \\ Luís Brochado Pinto dos Reis – 201003074 - ei11009@fe.up.pt \\ Wilson da Silva Oliveira - 201109281 - ei11085@fe.up.pt}
+\date{28 de Maio de 2014}
 
 \begin{document}
 
@@ -21,17 +22,12 @@
 \includegraphics[width=0.7\linewidth]{./LogoFeup}
 \end{figure}
 
-\title{\Huge\textbf{Redes Neuronais para Reconhecimento de Linguagem Gestual}\linebreak\linebreak\linebreak
-\Large\textbf{Relatório Intercalar}\linebreak\linebreak
-\Large{Inteligência Artificial}\linebreak
-\Large{3º ano do Mestrado Integrado em Engenharia Informática e Computação} \linebreak \linebreak}
-
-\author{\textbf{Elemenos do Grupo:}\\ Diogo Joaquim Pinto – 201108016 - ei11120@fe.up.pt \\ Luís Brochado Pinto dos Reis – 201003074 - ei11009@fe.up.pt \\ Wilson da Silva Oliveira - 201109281 - ei11085@fe.up.pt}
-\date{22 de abril de 2014}
 \maketitle
 
 \tableofcontents
+
 \newpage
+
 \section{Objetivo}
 \subitem
 
@@ -70,7 +66,7 @@ A camada de saída contém um número de nós igual ao número de gestos reconhe
 
 A camada intermédia é utilizada para auxiliar os cálculos efetuados pela rede neuronal, sendo que ainda precisamos de ajustar e procurar a estrutura interna mais benéfica para a nossa rede neuronal.
 
-\subsection{Implementação/aplicação do algoritmo "Back-Propagation"}
+\subsection{Implementação/aplicação do algoritmo \textit{Back-Propagation}}
 \subitem
 
 O algoritmo de "back-propagtion" propaga os parâmetros recebidos pela camada de entrada, aplicando-lhes uma função de transferência à medida que transmite os dados às camadas seguintes. Após chegar à camada de saída os dados são propagados para trás até à camada de entrada.
