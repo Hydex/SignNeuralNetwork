@@ -37,10 +37,6 @@ Este projeto visa a criação de um programa que seja capaz de aprender e reconh
 
 \subsection{Dataset}
 
-\subsubsection{Normalização dos dados}
-
-O dataset utilizado para esta aplicação não requeria normalização adicional, uma vez que os dados fornecidos já se encontram normalizados. 
-
 \subsubsection{Parâmetros}
 
 Através da utilização da camera e das luvas de medição foram obtidos onze parâmetros diferentes para cada mão, perfazendo um total de vinte e dois parâmetros que serão processados pela aplicação.
@@ -59,13 +55,22 @@ Através da utilização da camera e das luvas de medição foram obtidos onze p
 \end{itemize}
 \textbf{É assinalado na fonte da base de dados que as medidas de dobra dos dedos não são totalmente exatas}.
 
+\subsubsection{Normalização dos dados}
+
+O dataset necessitou de algumas normalizações, de modo a que todos os valores se encontrassem \textbf{entre 0 e 1}, nomeadamente em:
+\begin{itemize}
+\item X, Y, Z aplicou-se o módulo
+\item Rotação no eixo do X incrementou-se 0.5 aos valores
+\item Rotação no eixo do Y incrementou-se 1 e tirou-se a metade
+\end{itemize}
+
 \subsubsection{Processamento do Dataset}
 
-A base de dados contém um total de noventa e cinco palavras com vinte e sete amostras para cada uma totalizando assim dois mil quinhentos e sessenta e cinco amostras.
+A base de dados contém um total de \textbf{95} palavras com \textbf{27} amostras para cada uma totalizando assim \textbf{2565} amostras.
 Cada amostra contém em média sessenta medições únicas (correspondentes aos frames captados pelos dispositivos de medição) dos vinte e dois parâmetros especificados anteriormente.
 Dado o elevado número de dados optamos por processar a média destes valores, numa tentativa de reduzir a carga sobre a rede neuronal, mas com o cuidado de garantir valores únicos para cada palavra diferente. Para tentar eliminar os frames menos essenciais para o gesto (que seriam os frames iniciais e finais), optamos por eliminar estes do cálculo da média final.
 
-Para possibilitar o teste da aplicação nos nossos computadores "modestos" utilizamos uma versão reduzida da base de dados com apenas 8 palavras ao invés das 95 disponibilizadas. Não consideramos tal prejudicial visto que isto é uma \textit{proof of concept}
+Para possibilitar o teste da aplicação nos nossos computadores "modestos" utilizamos uma versão reduzida da base de dados com apenas 8 palavras ao invés das \textbf{95} disponibilizadas. Não consideramos tal prejudicial visto que isto é uma \textit{proof of concept}
 
 \subsection{Arquitectura da Rede Neuronal}
 
@@ -91,9 +96,20 @@ Dado isto, foram testadas inúmeras arquiteturas, incluindo redes totalmente con
 \item rotações no espaço da mão direita
 \item dois nós com todos os parâmetros
 \end{itemize}
-Após vários testes, acabamos com esta arquitetura como uma das finais: a outra é totalmente conexa e continha uma \textbf{camada intermédia única de 5 nós}.
 
-%TODO : pictures
+\begin{figure}[here]
+\centering
+\includegraphics[scale=0.15]{net2.png}
+\caption{Primeira rede neuronal final}
+\end{figure}
+
+Após vários testes, acabamos com esta arquitetura como uma das finais: a outra é totalmente conexa e continha uma \textbf{camada intermédia única de 5 nós}.
+\\
+\begin{figure}[here]
+\centering
+\includegraphics[scale=0.15]{net1.png}
+\caption{Segunda rede neuronal final}
+\end{figure}
 
 \subsubsection{Backpropagation}
 
@@ -101,11 +117,15 @@ Após vários testes, acabamos com esta arquitetura como uma das finais: a outra
 \centering
 \includegraphics{neuron.png}
 \caption{Exemplo de neurónio individual}
-\label{Figura 1}
 \end{figure}
 
 O algoritmo de backpropagation é um método do tipo feedforward.
-Dado isto, inicialmente propaga-se os parâmetros recebidos na camada de entrada pelas ligações. Nas camadas intermédias e na camada de saída, om \textit{impulsos} são somados e em seguida aplica-se uma função de transferência à medida que transmite os dados às camadas seguintes. 
+Dado isto, inicialmente propaga-se os parâmetros recebidos na camada de entrada pelas ligações. Nas camadas intermédias e na camada de saída, om \textit{impulsos} são somados e em seguida aplica-se uma função de transferência à medida que transmite os dados às camadas seguintes.
+
+\begin{figure}[here]
+\[s_{i} = \tfrac{1}{1 + e^{\sum_{k=1}^{m}v_{k} * p_{k}}}\]
+\caption{Transferência (sigmóide) com base na soma ponderada (pelos pesos) dos valores recebidos nas arestas}
+\end{figure}
 
 Chegando os \textit{impulsos} à camada de saída, informação é retro-propagada para trás até à camada de entrada: após o cálculo dos erros na camada de saída, os erros são propagados para as camadas intermédias e à medida que o erro vai sendo propagado para trás, o peso das ligações entre camadas é alterado de modo a diminuir o erro. Este passo também é conhecido como "Treino" da rede.
 
@@ -113,56 +133,18 @@ Atualizar o peso das ligações (é equivalente a minimizar o erro) é o modo de
 
 Este processo é feito através da função de custo quadrático e da sua derivada, sendo que a primeira é a função a minimizar no algoritmo de retropropagação (apresentando \textbf{\textit{x}} exemplos a um rede com \textbf{\textit{y}} saídas).
 
+% TODO 
 
+\section{Medições}
 
+\section{Conclusões}
 
+Com este projeto foi possível compreender o conceito de redes neuronais artificiais, bem como as potencialidades da sua utilidade na sociedade. Uma vez que o trabalho ainda não está completo o grupo tem grandes ambições em poder contribuir para a sociedade com este projeto, ajudando a melhorar a perceção de linguagem gestual bem como a identificação de gestos de um modo rápido e eficaz.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-\subsection{Concepção de uma rede neuronal multi-camada}
-\subitem
-
-
-
-\subsection{Implementação/aplicação do algoritmo \textit{Back-Propagation}}
-\subitem
-
-
-
-
-\subsection{Medição detalhada de resultados nos dados de treino e de teste}
-\subitem
-
-Com a arquitetura atual, para 8 palavras a rede demora cerca de 160 iterações pela base de dados para ser propriamente ensinada.
 
 \subsection{Organização do projeto}
-\subitem
 
-O trabalho foi dividido em três partes. 
+O trabalho foi dividido em três partes.
 A primeira consiste na criação da rede neuronal e aplicação do algoritmo de retropropagação ("Back-Propagation") e apresentar os resultados bem como as estatísticas.
 A segunda parte baseia-se na otimização da primeira parte, de modo a obter respostas mais rapidamente.
 A terceira parte trata-se da implementação de funcionalidades adicionais, como por exemplo, uma GUI ou o reconhecimento de gestos através de imagens e/ou vídeo. Esta última parte será posteriormente discutida com os docentes da disciplina.
@@ -178,24 +160,7 @@ A inclusão no cálculo do erro de uma iteração de aprendizagem pela rede neur
 Uma hipótese de aumentar a rapidez de treino da base de dados seria implementar a execução dos cálculos através da GPU do computador.
 
 \subsection{Variância como parâmetro}
-Uma vez que os dados de input são a média das medições dos parâmetros das amostras, a adição do input das variâncias dos respectivos cálculos poderia ser uma mais valia na distinção entre amostras de movimentos dinâmicos e de estáticos.
-
-\section{Trabalho efetuado}
-\subitem
-
-A primeira parte do projeto, enunciada na alínea anterior, já se encontra completa, sendo que o grupo está a iniciar a fase de otimização da rede neuronal, procurando obter um melhor desempenho, e resolver alguns problemas com a mesma.
-
-
-\section{Resultados esperados e forma de avaliação}
-\subitem
-
-À medida que se forem realizando mais testes, o esperado é que o programa a cada chamada necessite de consultar menos pastas da base de dados do que na chamada anterior, pois assim verifica-se que a programa aprendeu o gesto com sucesso e é capaz de o identificar.
-Para a utilização da rede neuronal, neste momento é necessário carregar um ficheiro com os valores inseridos manualmente para a rede neuronal poder identifica-lo. Esperamos que até à entrega final nos seja possível implementar uma maneira mais amigável para o utilizador fazer uso desta rede neuronal.
-
-\section{Conclusões}
-\subitem
-
-Com este projeto foi possível compreender o conceito de redes neuronais artificiais, bem como as potencialidades da sua utilidade na sociedade. Uma vez que o trabalho ainda não está completo o grupo tem grandes ambições em poder contribuir para a sociedade com este projeto, ajudando a melhorar a perceção de linguagem gestual bem como a identificação de gestos de um modo rápido e eficaz.
+Uma vez que os dados de input são a média das medições dos parâmetros das amostras, a adição do input das variâncias dos respectivos cálculos poderia ser uma mais valia na distinção entre amostras de movimentos dinâmicos e de estáticos. Seria preciso ter em conta, porém, que isto implicaria um aumento no número de arestas da rede, logo uma fase de aprendizagem mais prolongada.
 
 \section{Recursos}
 
