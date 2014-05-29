@@ -147,6 +147,13 @@ Este processo é feito através da função de custo quadrático e da sua deriva
 A aprendizagem é feita sobre a base de dados em ciclo, parando apenas quando uma iteração sobre todas as amostras de aprendizagem produz resultados corretos nos nós de saída. Definimos como resultados válidos na aprendizagem quando a diferença entre o valor mais alto na camada de saída difere de pelo menos \textbf{0.3} unidades do segundo mais alto.
 Já no teste, a diferença entre estes valores não tem qualquer restrição (de modo a potenciar a \textbf{generalização}).
 
+\section{Estruturação da aplicação}
+\begin{figure}[here]
+\centering
+\includegraphics[scale=0.33]{iart_nn.png}
+\caption{Diagrama de classes}
+\end{figure}
+
 \section{Medições}
 
 \subsection{Variação da velocidade de aprendizagem}
