@@ -16,6 +16,7 @@ import java.util.List;
 public class NeuralNetwork implements Serializable {
 
     static final double LEARNING_RATE = 0.3; // 0 <= value <= 1
+    public static final String NEURALNET_SER = "neuralnet.ser";
 
     private List<List<Node>> nodes;
     private List<Edge> edges;
@@ -216,7 +217,7 @@ public class NeuralNetwork implements Serializable {
 
     public void saveToFile() {
         try {
-            FileOutputStream fileOut = new FileOutputStream("neuralnet.ser");
+            FileOutputStream fileOut = new FileOutputStream(NEURALNET_SER);
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(this);
             out.close();

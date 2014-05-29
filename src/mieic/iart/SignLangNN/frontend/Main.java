@@ -29,7 +29,7 @@ public class Main {
 
     private static void loadNN() {
         try {
-            FileInputStream fileIn = new FileInputStream("neuralnet.ser");
+            FileInputStream fileIn = new FileInputStream(NeuralNetwork.NEURALNET_SER);
             ObjectInputStream in = new ObjectInputStream(fileIn);
 
             try {
