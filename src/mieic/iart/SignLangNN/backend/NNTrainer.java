@@ -33,7 +33,7 @@ public class NNTrainer {
                     network.train(s.getAverageGesture(), expectedResult);
 
                     double[] result = network.feedForward(s.getAverageGesture());
-                    if (!Intel.getInstance().getNearestRecord(result).equals(s.getName())) {
+                    if (!Intel.getInstance().getNearestRecord(result, true).equals(s.getName())) {
                         networkFailing = true;
                         j++;
                     }

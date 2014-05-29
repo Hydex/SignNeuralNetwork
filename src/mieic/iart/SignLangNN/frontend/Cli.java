@@ -65,9 +65,6 @@ public class Cli {
 
         int totalTest = 0, successTest = 0;
 
-        // TODO: verify thing with folders
-
-
         System.out.print("\nInsert path to test folder: ");
 
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
@@ -107,7 +104,7 @@ public class Cli {
 
                     double[] result = network.feedForward(sample.getAverageGesture());
 
-                    String bestBet = Intel.getInstance().getNearestRecord(result);
+                    String bestBet = Intel.getInstance().getNearestRecord(result, false);
 
                     if (bestBet.equals(sample.getName())) {
                         successTest++;
@@ -121,7 +118,7 @@ public class Cli {
             System.err.println("Not a valid path");
         }
 
-        System.out.println("The neural network has a " + successTest * 100.0 / totalTest + "% success rate.");
+        System.out.println("The neural network has a " + successTest * 100.0 / (float) totalTest + "% success rate.");
 
     }
 
@@ -180,7 +177,7 @@ public class Cli {
 
             double[] result = network.feedForward(sample.getAverageGesture());
 
-            String bestBet = Intel.getInstance().getNearestRecord(result);
+            String bestBet = Intel.getInstance().getNearestRecord(result, false);
 
             System.out.println("Neural network result: " + bestBet);
 
