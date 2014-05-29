@@ -7,6 +7,7 @@ import mieic.iart.SignLangNN.database.DBReader;
 import mieic.iart.SignLangNN.neuralnetwork.NeuralNetwork;
 
 import java.io.*;
+import java.util.Locale;
 import java.util.Scanner;
 
 /**
@@ -62,7 +63,7 @@ public class Cli {
 
     private void testNeuralNetworkProcess(NeuralNetwork network) {
 
-        float totalTest = 0.0f, successTest = 0.0f;
+        int totalTest = 0, successTest = 0;
 
         // TODO: verify thing with folders
 
@@ -91,6 +92,7 @@ public class Cli {
                     Scanner input = null;
                     try {
                         input = new Scanner(gesture);
+                        input.useLocale(Locale.US);
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
