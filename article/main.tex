@@ -123,6 +123,7 @@ O algoritmo de backpropagation é um método do tipo feedforward.
 Dado isto, inicialmente propaga-se os parâmetros recebidos na camada de entrada pelas ligações. Nas camadas intermédias e na camada de saída, om \textit{impulsos} são somados e em seguida aplica-se uma função de transferência à medida que transmite os dados às camadas seguintes.
 
 \begin{figure}[here]
+\centering
 \[s_{i} = \tfrac{1}{1 + e^{\sum_{k=1}^{m}v_{k} * p_{k}}}\]
 \caption{Transferência (sigmóide) com base na soma ponderada (pelos pesos) dos valores recebidos nas arestas}
 \end{figure}
@@ -131,26 +132,66 @@ Chegando os \textit{impulsos} à camada de saída, informação é retro-propaga
 
 Atualizar o peso das ligações (é equivalente a minimizar o erro) é o modo de se reduzir para zero, ou aproximadamente zero, o erro na camada de saída, tornando a rede neuronal fidedigna.
 
+\begin{figure}[here]
+\centering
+\[\varpi _{it} = \varpi _{it - 1} + \eta * \delta * \frac{\partial f(e)}{\partial e}*y\]
+\caption{Cálculo do novo peso da aresta}
+\end{figure}
+
 Este processo é feito através da função de custo quadrático e da sua derivada, sendo que a primeira é a função a minimizar no algoritmo de retropropagação (apresentando \textbf{\textit{x}} exemplos a um rede com \textbf{\textit{y}} saídas).
 
 % TODO 
 
+\subsection{Condição de paragem da aprendizagem}
+
+A aprendizagem é feita sobre a base de dados em ciclo, parando apenas quando uma iteração sobre todas as amostras de aprendizagem produz resultados corretos nos nós de saída. Definimos como resultados válidos na aprendizagem quando a diferença entre o valor mais alto na camada de saída difere de pelo menos \textbf{0.3} unidades do segundo mais alto.
+Já no teste, a diferença entre estes valores não tem qualquer restrição (de modo a potenciar a \textbf{generalização}).
+
 \section{Medições}
+
+\subsection{Variação da velocidade de aprendizagem}
+
+Após vários testes, concluimos que o valor onde a aprendizagem era feita com menos flutuações, maximizando a rapidez da aprendizagem, era com o valor de \textbf{0.3}. Valores superiores implicavam uma aprendizagem deficiente.
+
+\subsection{Resultados com a variação da quantidade de exemplos fornecidos}
+
+Foi necessário verificar a validade de cada caso na seguinte equação:
+
+\begin{figure}[here]
+\centering
+\[L<S*E\]
+L $\rightarrow$ nº de ligações \\ S $\rightarrow$ nº de saídas \\ E $\rightarrow$ nº de exemplos de aprendizagem
+\end{figure}
+
+Sendo que 
+\begin{figure}[here]
+\centering
+\[S*E = N\]
+N $\rightarrow$ nº de equações
+\end{figure}
+
+
+\begin{tabular}{|c|c|c|}
+\hline 
+da BD para aprendizagem & Resultado & Verifica \\ 
+\hline 
+11 & 216 $<$ 192 & Não \\ 
+22 & 216 $<$ 384 & Sim \\ 
+33 & 216 $<$ 576 & Sim \\ 
+44 & 216 $<$ 768 & Sim \\ 
+56 & 216 $<$ 960 & Sim \\ 
+67 & 216 $<$ 1152 & Sim \\ 
+78 & 216 $<$ 1344 & Sim \\ 
+89 & 216 $<$ 1536 & Sim \\ 
+\hline
+\end{tabular} 
+
+É possível concluir que, para 11\% da base de dados para aprendizagem, não existem exemplos suficientes para a rede neuronal \textbf{generalizar}, pelo que tende apenas a adaptar-se às equações lineares que modelam as soluções.
+
 
 \section{Conclusões}
 
-Com este projeto foi possível compreender o conceito de redes neuronais artificiais, bem como as potencialidades da sua utilidade na sociedade. Uma vez que o trabalho ainda não está completo o grupo tem grandes ambições em poder contribuir para a sociedade com este projeto, ajudando a melhorar a perceção de linguagem gestual bem como a identificação de gestos de um modo rápido e eficaz.
-
-
-\subsection{Organização do projeto}
-
-O trabalho foi dividido em três partes.
-A primeira consiste na criação da rede neuronal e aplicação do algoritmo de retropropagação ("Back-Propagation") e apresentar os resultados bem como as estatísticas.
-A segunda parte baseia-se na otimização da primeira parte, de modo a obter respostas mais rapidamente.
-A terceira parte trata-se da implementação de funcionalidades adicionais, como por exemplo, uma GUI ou o reconhecimento de gestos através de imagens e/ou vídeo. Esta última parte será posteriormente discutida com os docentes da disciplina.
-
-O grupo está a considerar construir uma rede neuronal modular caso esta se demonstre uma opção útil na otimização do programa. Uma rede neuronal modular atribui determinada tarefa que inicialmente seria desempenhada por um ou vários neurónios, a uma outra "sub" rede neuronal contida na rede principal.
-\\ \\
+Após a realização deste projeto/investigação foi possível comprovar a influência da variação de parâmetros como a \textbf{velocidade de aprendizagem} e o \textbf{número de exemplos de aprendizagem}. Identificamos ainda a importância e o poder da capacidade de generalização e de tratamento de informação não simbólica das redes neuronais. Porém, esta mesma natureza leva a que não nos seja possível obter explicações para as conclusões que ela retira.
 
 \section{Possíveis Melhorias}
 \subsection{Modificação do cálculo do erro}

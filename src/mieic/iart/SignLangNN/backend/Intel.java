@@ -88,7 +88,7 @@ public class Intel {
         return Sample.DATA_SOURCES_NR;
     }
 
-    public String getNearestRecord(double[] result) {
+    public String getNearestRecord(double[] result, boolean isTraining) {
         if (result.length != uniqueTerms.size()) {
             return null;
         }
@@ -105,7 +105,7 @@ public class Intel {
             }
         }
 
-        if (highestProb - secondBest < 0.3) {
+        if (isTraining && highestProb - secondBest < 0.3) {
             return "";
         } else {
             return bestBet;
