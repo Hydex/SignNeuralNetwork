@@ -16,7 +16,7 @@ import java.util.List;
 public class NeuralNetwork implements Serializable {
 
     static final double LEARNING_RATE = 0.3; // 0 <= value <= 1
-    public static final String NEURALNET_SER = "neuralnet.ser_3_78";
+    public static final String NEURALNET_SER = "neuralnet.ser_2";
 
     private List<List<Node>> nodes;
     private List<Edge> edges;
