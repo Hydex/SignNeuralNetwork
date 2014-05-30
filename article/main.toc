@@ -11,8 +11,9 @@
 \contentsline {section}{\numberline {3}Estrutura\IeC {\c c}\IeC {\~a}o da aplica\IeC {\c c}\IeC {\~a}o}{6}
 \contentsline {section}{\numberline {4}Medi\IeC {\c c}\IeC {\~o}es}{6}
 \contentsline {subsection}{\numberline {4.1}Varia\IeC {\c c}\IeC {\~a}o da velocidade de aprendizagem}{6}
-\contentsline {subsection}{\numberline {4.2}Resultados com a varia\IeC {\c c}\IeC {\~a}o da quantidade de exemplos fornecidos}{6}
-\contentsline {section}{\numberline {5}Conclus\IeC {\~o}es}{7}
+\contentsline {subsection}{\numberline {4.2}Sucesso na aprendizagem}{6}
+\contentsline {subsection}{\numberline {4.3}Resultados com a varia\IeC {\c c}\IeC {\~a}o da quantidade de exemplos fornecidos}{7}
+\contentsline {section}{\numberline {5}Conclus\IeC {\~o}es}{8}
 \contentsline {section}{\numberline {6}Poss\IeC {\'\i }veis Melhorias}{8}
 \contentsline {subsection}{\numberline {6.1}Modifica\IeC {\c c}\IeC {\~a}o do c\IeC {\'a}lculo do erro}{8}
 \contentsline {subsection}{\numberline {6.2}C\IeC {\'a}lculos atrav\IeC {\'e}s da GPU}{8}

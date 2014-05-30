@@ -59,9 +59,9 @@ Através da utilização da camera e das luvas de medição foram obtidos onze p
 
 O dataset necessitou de algumas normalizações, de modo a que todos os valores se encontrassem \textbf{entre 0 e 1}, nomeadamente em:
 \begin{itemize}
-\item X, Y, Z aplicou-se o módulo
-\item Rotação no eixo do X incrementou-se 0.5 aos valores
-\item Rotação no eixo do Y incrementou-se 1 e tirou-se a metade
+\item X, Y, Z aplicou-se o módulo;
+\item Rotação no eixo do X incrementou-se 0.5 aos valores;
+\item Rotação no eixo do Y incrementou-se 1 e tirou-se a metade.
 \end{itemize}
 
 \subsubsection{Processamento do Dataset}
@@ -70,7 +70,7 @@ A base de dados contém um total de \textbf{95} palavras com \textbf{27} amostra
 Cada amostra contém em média sessenta medições únicas (correspondentes aos frames captados pelos dispositivos de medição) dos vinte e dois parâmetros especificados anteriormente.
 Dado o elevado número de dados optamos por processar a média destes valores, numa tentativa de reduzir a carga sobre a rede neuronal, mas com o cuidado de garantir valores únicos para cada palavra diferente. Para tentar eliminar os frames menos essenciais para o gesto (que seriam os frames iniciais e finais), optamos por eliminar estes do cálculo da média final.
 
-Para possibilitar o teste da aplicação nos nossos computadores "modestos" utilizamos uma versão reduzida da base de dados com apenas 8 palavras ao invés das \textbf{95} disponibilizadas. Não consideramos tal prejudicial visto que isto é uma \textit{proof of concept}
+Para possibilitar o teste da aplicação nos nossos computadores "modestos" utilizamos uma versão reduzida da base de dados com apenas 8 palavras ao invés das \textbf{95} disponibilizadas. Não consideramos tal prejudicial visto que isto é uma \textit{proof of concept}.
 
 \subsection{Arquitectura da Rede Neuronal}
 
@@ -79,22 +79,22 @@ Optamos pela implementação de \textbf{redes de camada múltipla}, visto que os
 
 As camadas de entrada e de saída possuíam logo à partida valores fixos:
 \begin{itemize}
-\item a camada de entrada possui 22 nós, um por cada input
-\item a camada de saída possui 8 nós (no caso da base de dados reduzida), um por cada palavra
+\item a camada de entrada possui 22 nós, um por cada input;
+\item a camada de saída possui 8 nós (no caso da base de dados reduzida), um por cada palavra.
 \end{itemize}
 
 Após investigação sobre o tema com especialistas, não foi possível concluir qualquer associação entre os parâmetros relevantes.
 
 Dado isto, foram testadas inúmeras arquiteturas, incluindo redes totalmente conexas com mais e menos nós na camada intermédia, bem como outras topologias: numa delas, como tentativa de agregação de informação, a camada intermédia recebia os dados dos nós da camada de entrada como se segue:
 \begin{itemize}
-\item posição (x, y, z) das duas mãos
-\item dobra dos dedos polegar, indicador e médio da mão esquerda
-\item dobra dos dedos polegar, indicador e médio da mão direita
-\item dobra dos dedos anelar e mindinho da mão esquerda
-\item dobra dos dedos anelar e mindinho da mão direita
-\item rotações no espaço da mão esquerda
-\item rotações no espaço da mão direita
-\item dois nós com todos os parâmetros
+\item posição (x, y, z) das duas mãos;
+\item dobra dos dedos polegar, indicador e médio da mão esquerda;
+\item dobra dos dedos polegar, indicador e médio da mão direita;
+\item dobra dos dedos anelar e mindinho da mão esquerda;
+\item dobra dos dedos anelar e mindinho da mão direita;
+\item rotações no espaço da mão esquerda;
+\item rotações no espaço da mão direita;
+\item dois nós com todos os parâmetros.
 \end{itemize}
 
 \begin{figure}[here]
@@ -159,6 +159,20 @@ Já no teste, a diferença entre estes valores não tem qualquer restrição (de
 \subsection{Variação da velocidade de aprendizagem}
 
 Após vários testes, concluimos que o valor onde a aprendizagem era feita com menos flutuações, maximizando a rapidez da aprendizagem, era com o valor de \textbf{0.3}. Valores superiores implicavam uma aprendizagem deficiente.
+
+\subsection{Sucesso na aprendizagem}
+
+Foram testadas várias vezes as taxas de sucesso de aprendizagem, tendo sido efetuados testes com a base de conhecimento a 11\%, 44\% e 78\% do total da base de dados. Concolui-se portanto que quanto maior for a base de dados, maior será o tempo que esta demora a ser aprendida e carregada, mas o sucesso de aprendizagem cresce em função do tamanho da base de dados. Em seguida apresentam-se os resultados dos testes realizados:
+
+\begin{tabular}{|c|c|c|c|}
+\hline 
+\% da BD para aprendizagem & Tempo de treino(s)& Número de treinos & Sucesso (média)\\ 
+\hline 
+11 & 87.9810 & 6819 & 26.646 \% \\ 
+44 & 271.000 & 5057 & 84.166 \% \\ 
+78 & 185.976 & 2113 & 95.833 \% \\ 
+\hline
+\end{tabular} 
 
 \subsection{Resultados com a variação da quantidade de exemplos fornecidos}
 
