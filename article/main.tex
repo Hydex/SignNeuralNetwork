@@ -67,7 +67,7 @@ O dataset necessitou de algumas normalizações, de modo a que todos os valores 
 \subsubsection{Processamento do Dataset}
 
 A base de dados contém um total de \textbf{95} palavras com \textbf{27} amostras para cada uma totalizando assim \textbf{2565} amostras.
-Cada amostra contém em média sessenta medições únicas (correspondentes aos frames captados pelos dispositivos de medição) dos vinte e dois parâmetros especificados anteriormente.
+Cada amostra contém em média \textbf{60} medições únicas (correspondentes aos frames captados pelos dispositivos de medição) dos 22 parâmetros especificados anteriormente.
 Dado o elevado número de dados optamos por processar a média destes valores, numa tentativa de reduzir a carga sobre a rede neuronal, mas com o cuidado de garantir valores únicos para cada palavra diferente. Para tentar eliminar os frames menos essenciais para o gesto (que seriam os frames iniciais e finais), optamos por eliminar estes do cálculo da média final.
 
 Para possibilitar o teste da aplicação nos nossos computadores "modestos" utilizamos uma versão reduzida da base de dados com apenas 8 palavras ao invés das \textbf{95} disponibilizadas. Não consideramos tal prejudicial visto que isto é uma \textit{proof of concept}
